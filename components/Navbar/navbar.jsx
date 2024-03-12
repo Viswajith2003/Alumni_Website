@@ -19,13 +19,13 @@ export default function navbar() {
     setMenu(!menu);
   };
 
-//   window.addEventListener("scroll", setFixed);
+  //   window.addEventListener("scroll", setFixed);
   return (
-    <div className="fixed w-full z-40">
+    <div className="fixed w-full z-40 ">
       <div className="flex flex-row justify-between p-5 md:px-32 px-5 bg-darkBackground text-black bg-[#ffffff]">
         <div className=" flex items-center">
           <Link to="/" spy={true} smooth={true} duration={500}>
-            <h1 className="text-blue-800 font-semibold text-3xl cursor-pointer">
+            <h1 className="text-blue-800 font-semibold text-4xl cursor-pointer">
               Alumni Tracking
             </h1>
           </Link>
