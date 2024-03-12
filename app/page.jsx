@@ -1,11 +1,12 @@
-import Image from "next/image";
+
+import Navbar from "../components/Navbar/navbar";
+import Hero from "../components/Hero/hero";
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="font-bold text-4xl text-center">
-        Alumni Mangement system
-      </h1>
-    </div>
+    <main>
+      <Navbar />
+      {/* <Hero /> */}
+    </main>
   );
 }
