@@ -1,18 +1,12 @@
 import React from "react";
-import Image from 'next/image';
+import Image from "next/image";
 
-const Hero = () => {
+const Home = () => {
   return (
     <div>
-      <Image
-        src="/images/bg.jpeg"
-        alt="Your Image Alt Text"
-        width={500}
-        height={300}
-      />
+      <div className="bg-home w-full h-screen bg-cover "></div>
     </div>
   );
 };
 
-export default Hero;
-
+export default Home;

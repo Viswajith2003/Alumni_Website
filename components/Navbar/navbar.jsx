@@ -19,9 +19,9 @@ export default function navbar() {
     setMenu(!menu);
   };
 
-  //   window.addEventListener("scroll", setFixed);
+//   window.addEventListener("scroll", setFixed);
   return (
-    <div className="border-2 border-blue-800">
+    <div className="fixed w-full z-40">
       <div className="flex flex-row justify-between p-5 md:px-32 px-5 bg-darkBackground text-black bg-[#ffffff]">
         <div className=" flex items-center">
           <Link to="/" spy={true} smooth={true} duration={500}>
