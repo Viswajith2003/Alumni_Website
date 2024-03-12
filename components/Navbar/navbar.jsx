@@ -5,27 +5,17 @@ import { AiOutlineMenu } from "react-icons/ai";
 
 export default function navbar() {
   const [menu, setMenu] = useState(false);
-  const [nav, setNav] = useState(false);
-
-  const setFixed = () => {
-    if (window.screenY >= 0) {
-      setNav(true);
-    } else {
-      setNav(false);
-    }
-  };
 
   const handleChange = () => {
     setMenu(!menu);
   };
 
-  //   window.addEventListener("scroll", setFixed);
   return (
     <div className="fixed w-full z-40 ">
-      <div className="flex flex-row justify-between p-5 md:px-32 px-5 bg-darkBackground text-black bg-[#ffffff]">
+      <div className="flex flex-row justify-between p-6 md:px-32 px-5 bg-darkBackground text-black bg-[#ffffff]">
         <div className=" flex items-center" data-aos="fade-right">
           <Link to="/" spy={true} smooth={true} duration={500}>
-            <h1 className="text-blue-800 font-semibold text-4xl cursor-pointer">
+            <h1 className="text-blue-800 font-bold text-3xl cursor-pointer">
               Alumni Tracking
             </h1>
           </Link>
@@ -49,7 +39,6 @@ export default function navbar() {
             duration={500}
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
-            
           >
             About Us
           </Link>
@@ -60,7 +49,6 @@ export default function navbar() {
             duration={500}
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
-            
           >
             Service
           </Link>
@@ -71,7 +59,6 @@ export default function navbar() {
             duration={500}
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
-            
           >
             Gallery
           </Link>
@@ -82,7 +69,6 @@ export default function navbar() {
             duration={500}
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
-            
           >
             Contacts
           </Link>
