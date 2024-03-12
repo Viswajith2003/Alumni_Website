@@ -23,7 +23,7 @@ export default function navbar() {
   return (
     <div className="fixed w-full z-40 ">
       <div className="flex flex-row justify-between p-5 md:px-32 px-5 bg-darkBackground text-black bg-[#ffffff]">
-        <div className=" flex items-center">
+        <div className=" flex items-center" data-aos="fade-right">
           <Link to="/" spy={true} smooth={true} duration={500}>
             <h1 className="text-blue-800 font-semibold text-4xl cursor-pointer">
               Alumni Tracking
@@ -37,6 +37,8 @@ export default function navbar() {
             smooth={true}
             duration={500}
             className="text-blue-800"
+            data-aos="zoom-out-down"
+            data-aos-duration="3000"
           >
             Home
           </Link>
@@ -46,6 +48,8 @@ export default function navbar() {
             smooth={true}
             duration={500}
             className=" hover:text-blue-800"
+            data-aos="zoom-out-down"
+            
           >
             About Us
           </Link>
@@ -55,6 +59,8 @@ export default function navbar() {
             smooth={true}
             duration={500}
             className=" hover:text-blue-800"
+            data-aos="zoom-out-down"
+            
           >
             Service
           </Link>
@@ -64,6 +70,8 @@ export default function navbar() {
             smooth={true}
             duration={500}
             className=" hover:text-blue-800"
+            data-aos="zoom-out-down"
+            
           >
             Gallery
           </Link>
@@ -73,12 +81,17 @@ export default function navbar() {
             smooth={true}
             duration={500}
             className=" hover:text-blue-800"
+            data-aos="zoom-out-down"
+            
           >
             Contacts
           </Link>
         </nav>
 
-        <div className="hidden lg:flex flex-row items-center gap-4">
+        <div
+          className="hidden lg:flex flex-row items-center gap-4"
+          data-aos="zoom-in"
+        >
           <button className="border-2 border-blue-800 p-1 h-10 w-20 rounded-lg hover:bg-blue-800 hover:text-white hover:text-[15px]">
             <h1 className="font-bold ">Login</h1>
           </button>
