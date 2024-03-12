@@ -98,7 +98,7 @@ export default function navbar() {
       <div
         className={` ${
           menu ? "translate-x-0" : "-translate-x-full"
-        } lg:hidden flex flex-col absolute bg-darkBackground text-white left-0 top-20 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
+        } lg:hidden flex flex-col absolute bg-darkBackground text-white bg-white left-0 top-20 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
       >
         <Link
           to="home"
@@ -147,7 +147,7 @@ export default function navbar() {
           Contacts
         </Link>
 
-        <div className="flex flex-row justify-center items-center lg:hidden lg:flex-row gap-6">
+        {/* <div className="flex flex-row justify-center items-center lg:hidden lg:flex-row gap-6">
           <button className="border-2 border-blue-700 p-1 h-12 w-24 rounded-lg">
             <h1 className="text-black">Login</h1>
           </button>
@@ -155,7 +155,7 @@ export default function navbar() {
             <h1 className="text-white font-bold">Register</h1>
           </button>
           <button>Login</button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
