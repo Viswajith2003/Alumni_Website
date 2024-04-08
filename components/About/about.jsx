@@ -5,20 +5,20 @@ export default function About() {
     <div>
       <div>
         <div>
-          <h1>About GECP</h1>
-          <p>
+          <h1 className="font-semibold text-2xl">About GECP</h1>
+          <p className="mt-2">
             Please click the Read more button to know more details about
             Government Engineering College Sreekrishnapuram, Palakkad
           </p>
-          <button>Read More</button>
+          <button className="bg-[#2c75e2]">Read More</button>
         </div>
         <div>pictures1</div>
       </div>
       <div>
-        <h1>About this website</h1>
+        <h1 className="font-semibold text-2xl">About this website</h1>
         <div>picture2</div>
         <div>
-          <h1>About this website</h1>
+          <h1 className="font-semibold">About this website</h1>
           <p>
             This Web Application Project is called Web Based Alumni Tracking
             System. This is our project during Final Year Project. It is
