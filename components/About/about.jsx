@@ -10,7 +10,7 @@ export default function About() {
             Please click the Read more button to know more details about
             Government Engineering College Sreekrishnapuram, Palakkad
           </p>
-          <button className="bg-[#2c75e2]">Read More</button>
+          <button className="bg-[#2c75e2] p-2 text-white rounded-xl">Read More</button>
         </div>
         <div>pictures1</div>
       </div>
