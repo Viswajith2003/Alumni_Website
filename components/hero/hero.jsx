@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import Typed from "typed.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Navbar from "../navbar/navbar.jsx";
 
 const Home = () => {
   useEffect(() => {
@@ -23,6 +24,9 @@ const Home = () => {
   }, []);
 
   return (
+    <div>
+      <Navbar/>
+
     <div className="relative h-screen overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full bg-cover bg-home z-0"></div>
       <div className="relative z-10 flex flex-col items-center justify-center h-full gap-4">
@@ -43,6 +47,7 @@ const Home = () => {
           </h1>
         </div>
       </div>
+    </div>
     </div>
   );
 };
