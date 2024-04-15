@@ -146,15 +146,6 @@ export default function navbar() {
           Contacts
         </Link>
 
-        {/* <div className="flex flex-row justify-center items-center lg:hidden lg:flex-row gap-6">
-          <button className="border-2 border-blue-700 p-1 h-12 w-24 rounded-lg">
-            <h1 className="text-black">Login</h1>
-          </button>
-          <button className="bg-blue-700 p-2 h-12 w-28 rounded-lg ">
-            <h1 className="text-white font-bold">Register</h1>
-          </button>
-          <button>Login</button>
-        </div> */}
       </div>
     </div>
   );

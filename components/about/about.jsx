@@ -2,35 +2,44 @@ import React from "react";
 
 export default function About() {
   return (
-    <div>
-      <div>
-        <div>
-          <h1 className="font-semibold text-2xl">About GECP</h1>
-          <p className="mt-2">
-            Please click the Read more button to know more details about
-            Government Engineering College Sreekrishnapuram, Palakkad
-          </p>
-          <button className="bg-[#2c75e2] p-2 text-white rounded-xl">Read More</button>
+    <div className="container mx-auto pt-12">
+      <h1 className="font-bold text-5xl mb-10">About Us</h1>
+      <div className="grid grid-cols-1  p-2">
+        <div className="flex">
+          <div className=" p-3  w-3/4">
+            <img src="/images/about.png" alt="About Us" className="w-96 h-96" />
+          </div>
+
+          <div className=" p-5 pt-20 col-span-2">
+            <h2 className="text-3xl font-semibold mb-4">Our Mission</h2>
+            <p className="text-gray-700 text-xl">
+              Our mission is to create a robust Alumni Management System that
+              fosters connections and engagement among alumni, students, and the
+              institution. We aim to provide a platform for lifelong learning,
+              networking, and professional development opportunities.
+            </p>
+          </div>
         </div>
-        <div>pictures1</div>
-      </div>
-      <div>
-        <h1 className="font-semibold text-2xl">About this website</h1>
-        <div>picture2</div>
-        <div>
-          <h1 className="font-semibold">About this website</h1>
-          <p>
-            This Web Application Project is called Web Based Alumni Tracking
-            System. This is our project during Final Year Project. It is
-            originally written in next js and firebase. This simple alumns
-            tracking web app is built for Government Engineering College
-            Sreekrishnapuram, Palakkad. The system has an online form for she
-            graduated mident of the said University to track their employment
-            status This website has a admin panel and in the admin panel there
-            are so many features Alumni can't use the service of this website
-            until admin will not verify them. The admin panel has the list of
-            students, employed, self-employed, and unemployed.
-          </p>
+        <div className="flex">
+          <div className="p-5 pt-16 h-80">
+            <h2 className="text-3xl font-semibold mb-4">Our Vision</h2>
+            <p className="text-gray-700 text-xl">
+              Our vision is to build a vibrant and inclusive alumni community
+              that contributes to the growth and success of both individual
+              members and the alma mater. We envision a dynamic platform that
+              facilitates meaningful interactions, knowledge sharing, and
+              collaboration among alumni across generations and geographical
+              locations.
+            </p>
+          </div>
+
+          <div className="  w-auto">
+            <img
+              src="/images/about2.png"
+              alt="About Us"
+              className="w-[930px] h-80"
+            />
+          </div>
         </div>
       </div>
     </div>
