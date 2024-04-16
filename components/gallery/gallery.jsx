@@ -22,9 +22,9 @@ export default function gallery() {
         </div>
       </div>
       <div className="flex gap-4 ml-5 px-2">
-        <div className="bg-[#e62222] w-full h-72 my-4">image7</div>
+        <div className="bg-[#236cfd] w-full h-72 my-4">image7</div>
         <div className="bg-[#84f92b] w-full my-4">image8</div>
-        <div className="bg-[#84f92b] w-full my-4">image9</div>
+        <div className="bg-[#68f2c6] w-full my-4">image9</div>
       </div>
     </div>
   );

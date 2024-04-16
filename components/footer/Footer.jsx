@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div>
+    <div className="container mx-auto">
       {/* <!-- Footer container --> */}
       <footer class="text-center text-surface/75 bg-[#ffffff] text-black lg:text-left">
         <div class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
