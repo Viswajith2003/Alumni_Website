@@ -4,18 +4,20 @@ import Footer from "../components/footer/Footer";
 import Service from "../components/servicess/service";
 import Gallery from "../components/gallery/gallery"
 import Contact from   "../components/contacts/form"
+import Register from "../components/Register/register";
 
 
 export default function Home() {
   return (
     <main>
       
-      <Hero/>
+      {/* <Hero/>
       <About/>
       <Service/>
       <Gallery/>
       <Contact/>
-      <Footer/>
+      <Footer/> */}
+      <Register/>
     </main>
   );
 }

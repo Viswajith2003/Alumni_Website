@@ -22,7 +22,7 @@ export default function navbar() {
         </div>
         <nav className="hidden lg:flex flex-row items-center gap-6 font-bold text-xl ">
           <Link
-            to="home"
+            to="hero"
             spy={true}
             smooth={true}
             duration={500}
@@ -33,7 +33,7 @@ export default function navbar() {
             Home
           </Link>
           <Link
-            to="features"
+            to="about"
             spy={true}
             smooth={true}
             duration={500}
@@ -43,7 +43,7 @@ export default function navbar() {
             About Us
           </Link>
           <Link
-            to="destination"
+            to="services"
             spy={true}
             smooth={true}
             duration={500}
@@ -53,7 +53,7 @@ export default function navbar() {
             Service
           </Link>
           <Link
-            to="about"
+            to="gallary"
             spy={true}
             smooth={true}
             duration={500}
@@ -78,11 +78,11 @@ export default function navbar() {
           className="hidden lg:flex flex-row items-center gap-4"
           data-aos="zoom-in"
         >
-          <button className="border-2 border-blue-800 p-1 h-10 w-20 rounded-lg hover:bg-blue-800 hover:text-white hover:text-[15px]">
+          <button className="border-2 border-blue-800 p-1 h-10 w-20 rounded-lg hover:bg-blue-800 hover:text-white hover:text-[15px] hover:scale-95">
             <h1 className="font-bold ">Login</h1>
           </button>
 
-          <button className="bg-blue-700 p-1 h-10 w-20 rounded-lg hover:text-[15px]">
+          <button className="bg-blue-700 p-1 h-10 w-20 rounded-lg hover:text-[15px] hover:scale-95">
             <h1 className="text-white font-bold">Register</h1>
           </button>
         </div>
