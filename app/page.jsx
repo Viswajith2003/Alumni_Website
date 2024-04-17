@@ -5,6 +5,7 @@ import Service from "../components/servicess/service";
 import Gallery from "../components/gallery/gallery"
 import Contact from   "../components/contacts/form"
 import Register from "../components/Register/register";
+import Login from "../components/Login/login";
 
 
 export default function Home() {
@@ -17,7 +18,8 @@ export default function Home() {
       <Gallery/>
       <Contact/>
       <Footer/> */}
-      <Register/>
+      {/* <Register/> */}
+      <Login/>
     </main>
   );
 }

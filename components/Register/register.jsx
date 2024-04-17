@@ -27,7 +27,7 @@ export default function Register() {
         />
 
         <button className="mt-5 h-[50px] w-[400px] bg-[#2a8af8] p-2 rounded-xl text-white font-bold mb-6">
-          Register
+          <h1 className="text-2xl font-bold">Register </h1>
         </button>
       </div>
     </div>
