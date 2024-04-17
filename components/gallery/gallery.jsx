@@ -6,7 +6,13 @@ export default function gallery() {
       <h1 className="font-bold text-4xl my-5 text-center">Gallery</h1>
       <div className="grid grid-cols-2 w-full">
         <div className="m-4">
-          <div className="bg-[#2f46f1] w-auto h-64">image1</div>
+          <div className="border-2 border-black w-auto h-64">
+            <img
+              src="/images/gallary1.jpg"
+              alt="About Us"
+              className="w-[930px] h-80"
+            />
+          </div>
           <div className="flex gap-4">
             <div className="bg-[#e62222] w-full h-60 mt-4">image2</div>
             <div className="bg-[#84f92b] w-full mt-4">image3</div>
