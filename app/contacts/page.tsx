@@ -50,8 +50,8 @@ export default function form() {
           <div className="mt-5 hover:scale-95">
             <textarea
               name="text"
-              cols="50"
-              rows="8"
+              cols={50}
+              rows={8}
               placeholder="Messages"
               className="border-2 border-black p-3 rounded-xl "
             ></textarea>
