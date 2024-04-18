@@ -16,8 +16,8 @@ export default function Home() {
       <Gallery />
       <Contact />
       <Footer />
-      <Register />
-      <Login />
+      {/* <Register />
+      <Login /> */}
     </main>
   );
 }
