@@ -4,7 +4,7 @@ export default function gallery() {
   return (
     <div className="container mx-auto">
       <h1 className="font-bold text-4xl my-5 text-center">Gallery</h1>
-      <div className="grid md:grid-cols-2  w-full bg-yellow-300 ">
+      <div className="grid md:grid-cols-2 md:w-full">
         <div className="m-4">
           <div className=" w-auto h-64">
             <img
