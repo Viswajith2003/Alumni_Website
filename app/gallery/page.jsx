@@ -4,7 +4,7 @@ export default function gallery() {
   return (
     <div className="container mx-auto">
       <h1 className="font-bold text-4xl my-5 text-center">Gallery</h1>
-      <div className="grid grid-cols-2 w-full">
+      <div className="grid md:grid-cols-2  w-full bg-yellow-300 ">
         <div className="m-4">
           <div className=" w-auto h-64">
             <img
@@ -57,7 +57,7 @@ export default function gallery() {
           </div>
         </div>
       </div>
-      <div className="flex gap-4 ml-5 px-2">
+      <div className="md:flex gap-4 ml-5 px-2">
         <div className=" w-full h-72 my-4">
           <img
             src="/images/gallary7.webp"
