@@ -7,11 +7,13 @@ import Contact from "./contacts/page";
 import Register from "./register/page";
 import Login from "./login/page";
 import HomePage from "./homePage/page";
+import Job from "./job/page";
 
 export default function Home() {
   return (
     <div>
-      <HomePage/>
+      <Job />
+      {/* <HomePage/> */}
       {/* <Welcome />
       <About />
       <Service />
