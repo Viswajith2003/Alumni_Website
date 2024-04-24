@@ -1,4 +1,5 @@
 "use client";
+import { RiArrowDropDownLine } from "react-icons/ri";
 import React, { useState } from "react";
 import Link from "next/link";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -14,7 +15,7 @@ export default function HomeNav() {
     <div className="fixed w-full z-40 ">
       <div className="flex flex-row justify-between p-6 md:px-32 px-5 bg-darkBackground text-black bg-[#ffffff]">
         <div className=" flex items-center" data-aos="fade-right">
-          <Link href="/hero" >
+          <Link href="/hero">
             <h1 className="text-blue-800 font-bold text-3xl cursor-pointer">
               Alumni Tracking
             </h1>
@@ -22,7 +23,7 @@ export default function HomeNav() {
         </div>
         <nav className="hidden lg:flex flex-row items-center gap-6 font-bold text-xl ">
           <Link
-            href="/hero"
+            href="/"
             className="text-blue-800"
             data-aos="zoom-out-down"
             data-aos-duration="3000"
@@ -30,18 +31,19 @@ export default function HomeNav() {
             Home
           </Link>
           <Link
-            href="/about"
+            href="/"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
-            About Us
+            Events
           </Link>
           <Link
-            href="/servicess"
-            className=" hover:text-blue-800"
+            href="/"
+            className="flex hover:text-blue-800"
             data-aos="zoom-out-down"
           >
-            Services
+            Jobs
+            <RiArrowDropDownLine className="mt-1 w-6 h-6" />
           </Link>
           <Link
             href="/gallary"
@@ -51,11 +53,11 @@ export default function HomeNav() {
             Gallery
           </Link>
           <Link
-            href="/contacts"
+            href="/"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
-            Contacts
+            Profile
           </Link>
         </nav>
 
@@ -65,15 +67,15 @@ export default function HomeNav() {
         >
           <Link href="/login">
             <button className="border-2 border-blue-800 p-1 h-10 w-20 rounded-lg hover:bg-blue-800 hover:text-white hover:text-[15px] hover:scale-95">
-              <h1 className="font-bold ">Login</h1>
+              <h1 className="font-bold ">Logout</h1>
             </button>
           </Link>
 
-          <Link href="/register">
+          {/* <Link href="/register">
             <button className="bg-blue-700 p-1 h-10 w-20 rounded-lg hover:text-[15px] hover:scale-95">
               <h1 className="text-white font-bold">Register</h1>
             </button>
-          </Link>
+          </Link> */}
         </div>
 
         <div
@@ -92,17 +94,17 @@ export default function HomeNav() {
           Home
         </Link>
         <Link href="/about" className="text-black hover:text-blue-800">
-          About Us
+          Events
         </Link>
         <Link href="/servicess" className="text-black hover:text-blue-800">
-          Service
+          Jobs
         </Link>
 
         <Link href="/gallery" className="text-black hover:text-blue-800">
           Gallery
         </Link>
         <Link href="/contacts" className="text-black hover:text-blue-800">
-          Contacts
+          Profile
         </Link>
       </div>
     </div>
