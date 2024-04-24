@@ -7,7 +7,8 @@ import Contact from "./contacts/page";
 import Register from "./register/page";
 import Login from "./login/page";
 import HomePage from "./homePage/page";
-import Job from "./job/page";
+import ViewJob from "./viewJob/page";
+import PostJob from "./postJob/page";
 import HomeNav from "./homeNav/page";
 
 export default function Home() {
@@ -18,11 +19,12 @@ export default function Home() {
       <Service />
       <Gallery />
       <Contact />
-      <Footer />
+      <Footer />*/}
       <Register />
-      <Login /> */}
+      <Login />
       {/* <HomePage /> */}
-      <Job />
+      {/* <ViewJob /> */}
+      <PostJob />
     </div>
   );
 }

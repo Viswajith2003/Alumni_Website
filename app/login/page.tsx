@@ -2,10 +2,10 @@ import React from "react";
 
 export default function Login() {
   return (
-    <div className="bg-blue-500 h-screen flex justify-center items-center ">
+    <div className="bg-[#edeced] h-screen flex justify-center items-center ">
       <div className="bg-white w-[560px] rounded-xl p-4 flex flex-col justify-center items-center">
         <div className="flex flex-col justify-center items-center gap-8">
-          <h1 className=" font-bold text-3xl mt-5">Sign In</h1>
+          <h1 className=" font-bold text-3xl mt-5 text-blue-700 ">Sign In</h1>
           <input
             type="email"
             placeholder="Enter Your Mail"
@@ -25,9 +25,16 @@ export default function Login() {
           <p className="text-[16px] font-semibold">Forgot password?</p>
         </div>
 
-        <button className="mt-5 h-[50px] w-[400px] bg-[#2a8af8] p-2 rounded-xl text-white font-bold mb-6">
+        <button className="mt-5 h-[50px] w-[400px] bg-blue-700 p-2 rounded-xl text-white font-bold mb-1">
           <h1 className="text-2xl font-bold">Login </h1>
         </button>
+
+        <div className="flex justify-start w-[400px] p-1 mb-6">
+          <p className="text-[16px] font-normal">Don't have an account? </p>
+          <p className="text-[16px] font-semibold text-blue-700 ml-2">
+            Register
+          </p>
+        </div>
       </div>
     </div>
   );
