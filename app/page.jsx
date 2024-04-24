@@ -7,19 +7,22 @@ import Contact from "./contacts/page";
 import Register from "./register/page";
 import Login from "./login/page";
 import HomePage from "./homePage/page";
+import HomeNav from "./homeNav/page";
 
 export default function Home() {
   return (
     <div>
-      <HomePage/>
+      
       {/* <Welcome />
       <About />
       <Service />
       <Gallery />
       <Contact />
-      <Footer /> */}
-      {/* <Register />
+      <Footer />
+      <Register />
       <Login /> */}
+      <HomePage/> 
+
     </div>
   );
 }

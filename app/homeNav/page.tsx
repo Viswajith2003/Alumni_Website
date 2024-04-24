@@ -1,5 +1,6 @@
 "use client";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { FaSearch } from "react-icons/fa";
 import React, { useState } from "react";
 import Link from "next/link";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -65,17 +66,22 @@ export default function HomeNav() {
           className="hidden lg:flex flex-row items-center gap-4"
           data-aos="zoom-in"
         >
-          <Link href="/login">
+          <Link href="/">
+            <div className="flex border-2 border-black rounded-lg">
+              <input
+                type="search"
+                placeholder="Search"
+                className="px-3 p-1 h-10 w-52 rounded-lg"
+              />
+              <FaSearch className="mt-3 w-5 h-5 mr-4 text-gray-500 " />
+            </div>
+          </Link>
+
+          <Link href="/">
             <button className="border-2 border-blue-800 p-1 h-10 w-20 rounded-lg hover:bg-blue-800 hover:text-white hover:text-[15px] hover:scale-95">
               <h1 className="font-bold ">Logout</h1>
             </button>
           </Link>
-
-          {/* <Link href="/register">
-            <button className="bg-blue-700 p-1 h-10 w-20 rounded-lg hover:text-[15px] hover:scale-95">
-              <h1 className="text-white font-bold">Register</h1>
-            </button>
-          </Link> */}
         </div>
 
         <div
@@ -96,8 +102,12 @@ export default function HomeNav() {
         <Link href="/about" className="text-black hover:text-blue-800">
           Events
         </Link>
-        <Link href="/servicess" className="text-black hover:text-blue-800">
+        <Link
+          href="/servicess"
+          className="flex ml-80 text-black hover:text-blue-800"
+        >
           Jobs
+          <RiArrowDropDownLine className="mt-1 w-6 h-6" />
         </Link>
 
         <Link href="/gallery" className="text-black hover:text-blue-800">
