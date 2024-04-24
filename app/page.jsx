@@ -8,20 +8,21 @@ import Register from "./register/page";
 import Login from "./login/page";
 import HomePage from "./homePage/page";
 import Job from "./job/page";
+import HomeNav from "./homeNav/page";
 
 export default function Home() {
   return (
     <div>
-      <Job />
-      {/* <HomePage/> */}
       {/* <Welcome />
       <About />
       <Service />
       <Gallery />
       <Contact />
-      <Footer /> */}
-      {/* <Register />
+      <Footer />
+      <Register />
       <Login /> */}
+      {/* <HomePage /> */}
+      <Job />
     </div>
   );
 }
