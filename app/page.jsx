@@ -8,6 +8,7 @@ import Register from "./register/page";
 import Login from "./login/page";
 import HomePage from "./homePage/page";
 import HomeNav from "./homeNav/page";
+import AdminDash from "./admin/page";
 
 export default function Home() {
   return (
@@ -21,7 +22,9 @@ export default function Home() {
       <Footer />
       <Register />
       <Login /> */}
-      <HomePage/> 
+      {/* <HomePage/>  */}
+      <AdminDash/>
+
 
     </div>
   );
