@@ -10,6 +10,7 @@ import HomePage from "./homePage/page";
 import ViewJob from "./viewJob/page";
 import PostJob from "./postJob/page";
 import HomeNav from "./homeNav/page";
+import AdminDash from "./admin/page";
 
 export default function Home() {
   return (
@@ -19,12 +20,15 @@ export default function Home() {
       <Service />
       <Gallery />
       <Contact />
-      <Footer />*/}
+      <Footer />
       <Register />
       <Login />
-      {/* <HomePage /> */}
-      {/* <ViewJob /> */}
-      <PostJob />
+       <HomePage /> 
+      <ViewJob /> 
+      <PostJob /> 
+      <HomePage/>  */}
+      <AdminDash/>
+
     </div>
   );
 }

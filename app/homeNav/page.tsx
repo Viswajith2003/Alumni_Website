@@ -104,7 +104,7 @@ export default function HomeNav() {
         </Link>
         <Link
           href="/servicess"
-          className="flex ml-80 text-black hover:text-blue-800"
+          className="flex ml-[340px] text-black hover:text-blue-800"
         >
           Jobs
           <RiArrowDropDownLine className="mt-1 w-6 h-6" />
