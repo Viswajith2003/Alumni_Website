@@ -5,6 +5,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { AiOutlineMenu } from "react-icons/ai";
 
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/config";
+
 export default function HomeNav() {
   const [menu, setMenu] = useState(false);
 
@@ -78,7 +81,13 @@ export default function HomeNav() {
           </Link>
 
           <Link href="/">
-            <button className="border-2 border-blue-800 p-1 h-10 w-20 rounded-lg hover:bg-blue-800 hover:text-white hover:text-[15px] hover:scale-95">
+            <button
+              className="border-2 border-blue-800 p-1 h-10 w-20 rounded-lg hover:bg-blue-800 hover:text-white hover:text-[15px] hover:scale-95"
+              onClick={() => {
+                signOut(auth);
+                sessionStorage.removeItem("user");
+              }}
+            >
               <h1 className="font-bold ">Logout</h1>
             </button>
           </Link>

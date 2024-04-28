@@ -15,20 +15,18 @@ import AdminDash from "./admin/page";
 export default function Home() {
   return (
     <div>
-      {/* <Welcome />
-      <About />
-      <Service />
-      <Gallery />
-      <Contact />
-      <Footer />
-      <Register />
-      <Login />
-       <HomePage /> 
-      <ViewJob /> 
-      <PostJob /> 
-      <HomePage/>  */}
-      <AdminDash/>
-
+      <Welcome />
+      {/* <About /> */}
+      {/* <Service /> */}
+      {/* <Gallery /> */}
+      {/* <Contact /> */}
+      {/* <Footer /> */}
+      {/* <Register /> */}
+      {/* <Login /> */}
+      {/* <ViewJob /> */}
+      {/* <PostJob /> */}
+      {/* <HomePage /> */}
+      {/* <AdminDash /> */}
     </div>
   );
 }
