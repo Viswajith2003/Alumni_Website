@@ -7,13 +7,14 @@ import Contact from "./contacts/page";
 import Register from "./register/page";
 import Login from "./login/page";
 import HomePage from "./homePage/page";
+import ViewJob from "./viewJob/page";
+import PostJob from "./postJob/page";
 import HomeNav from "./homeNav/page";
 import AdminDash from "./admin/page";
 
 export default function Home() {
   return (
     <div>
-      
       {/* <Welcome />
       <About />
       <Service />
@@ -21,10 +22,12 @@ export default function Home() {
       <Contact />
       <Footer />
       <Register />
-      <Login /> */}
-      {/* <HomePage/>  */}
+      <Login />
+       <HomePage /> 
+      <ViewJob /> 
+      <PostJob /> 
+      <HomePage/>  */}
       <AdminDash/>
-
 
     </div>
   );
