@@ -1,9 +1,15 @@
 import React from "react";
+import NavAdmin from "../navbar/page";
 
-export default function DashAdmin() {
+// DashAdmin Component
+export default function DashAdmin({ sidebarToggle, setSidebarToggle }) {
   return (
-    <div>
-      <h1>This is dashboard page</h1>
+    <div className={`${sidebarToggle ? "" : "ml-64"} w-full`}>
+      <NavAdmin
+        sidebarToggle={sidebarToggle}
+        setSidebarToggle={setSidebarToggle}
+      />
     </div>
   );
 }
+

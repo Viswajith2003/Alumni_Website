@@ -1,16 +1,18 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Sidebar from "./sidebar/page";
 import DashAdmin from "./dashboard /page";
-import NavAdmin from "./navbar/page";
 
 export default function AdminDash() {
+  const [sidebarToggle, setSidebarToggle] = useState(false); // ensure this is defined
   return (
-    <div>
-      <div className="w-full flex">
-        <NavAdmin />
-        <Sidebar />
-      </div>
-      <DashAdmin />
+    <div className="flex">
+      <Sidebar sidebarToggle={sidebarToggle} />
+      <DashAdmin
+        sidebarToggle={sidebarToggle}
+        setSidebarToggle={setSidebarToggle}
+      />
     </div>
   );
 }
+
