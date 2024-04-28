@@ -10,10 +10,12 @@ module.exports = {
       backgroundImage: {
         home: "url(/images/bg.png)",
       },
-      // backgroundImage1: {
-      //   home: "url(/images/home.png)",
-      // },
     },
   },
   plugins: [],
+  variants: {
+    extend: {
+      display: ["focus-group"],
+    },
+  },
 };
