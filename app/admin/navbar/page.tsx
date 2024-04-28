@@ -4,10 +4,10 @@ import { FaBars, FaBell, FaSearch, FaUserCircle } from "react-icons/fa";
 // Correct
 export default function NavAdmin({ sidebarToggle, setSidebarToggle }) {
   return (
-    <div className="bg-gray-800 px-4 py-3 flex justify-between">
+    <div className="text-black bg-slate-400 px-4 py-3 flex h-20 justify-between">
       <div className="flex items-center text-xl">
         <FaBars
-          className="text-white me-4 cursor-pointer"
+          className=" me-4 cursor-pointer"
           onClick={() => setSidebarToggle(!sidebarToggle)} // should call the function
         />
       </div>
@@ -23,13 +23,13 @@ export default function NavAdmin({ sidebarToggle, setSidebarToggle }) {
             className="w-full px-4 py-1 pl-12 rounded shadow outline-none hidden md:block"
           />
         </div>
-        <div className="text-white">
+        <div className="">
           <FaBell className="w-6 h-6" />
         </div>
         <div className="relative">
-          <button className="text-white group">
+          <button className=" group">
             <FaUserCircle className="w-6 h-6 mt-1" />
-            <div className="z-10 hidden absolute bg-white rounded-lg shadow w-32 group-focus:block top-full right-0">
+            <div className="z-10 hidden absolute  rounded-lg shadow w-32 group-focus:block top-full right-0">
               <ul className="py-2 text-sm text-gray-950">
                 <li>
                   <a href="">Profile</a>
