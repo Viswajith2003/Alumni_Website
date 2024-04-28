@@ -1,9 +1,12 @@
 import React from 'react'
+import Sidebar from './sidebar/page'
+import DashAdmin from './dashboard /page'
 
 export default function AdminDash() {
   return (
     <div>
-      this is admin page
+      <Sidebar/>
+      <DashAdmin/>
     </div>
   )
 }
