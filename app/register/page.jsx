@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/config";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Register() {
   // State variables for input values and errors
@@ -11,6 +13,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const router = useRouter();
 
   const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);
@@ -20,6 +23,7 @@ export default function Register() {
       const res = await createUserWithEmailAndPassword(email, password);
       console.log({ res });
       console.log({ name, email, phone, password });
+      router.push("/login");
     } catch (e) {
       console.error(e);
     }
@@ -87,7 +91,7 @@ export default function Register() {
     <div className="bg-[#edeced] h-screen flex flex-col justify-center items-center ">
       <div className="bg-white w-[560px] h-auto rounded-xl p-4 flex flex-col justify-center items-center ">
         <div className="flex flex-col justify-center items-center">
-          <h1 className=" font-bold text-3xl mt-5 text-blue-700">Sign Up</h1>
+          <h1 className=" font-bold text-3xl mt-5 text-blue-700">REGISTER</h1>
           <div className="block w-auto h-auto mt-5 mb-4">
             <input
               type="text"
@@ -158,7 +162,11 @@ export default function Register() {
 
         <div className="flex justify-start w-[400px] p-1 mb-6">
           <p className="text-[16px] font-normal">Already have an account? </p>
-          <p className="text-[16px] font-semibold text-blue-700 ml-2">Login</p>
+          <Link href="/login">
+            <p className="text-[16px] font-semibold text-blue-700 ml-2">
+              Login
+            </p>
+          </Link>
         </div>
       </div>
     </div>

@@ -15,14 +15,14 @@ import AdminDash from "./admin/page";
 export default function Home() {
   return (
     <div>
-      {/* <Welcome /> */}
+      <Welcome />
       {/* <About /> */}
       {/* <Service /> */}
       {/* <Gallery /> */}
       {/* <Contact /> */}
       {/* <Footer /> */}
       {/* <Register /> */}
-      <Login />
+      {/* <Login /> */}
       {/* <ViewJob /> */}
       {/* <PostJob /> */}
       {/* <HomePage /> */}

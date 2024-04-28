@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/config";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Login() {
   // Define the type for errors state
@@ -25,6 +26,7 @@ export default function Login() {
       const res = await signInWithEmailAndPassword(email, password);
       console.log({ res });
       console.log({ email, password });
+      sessionStorage.setItem("user", "true");
       router.push("/homePage");
     } catch (e) {
       console.error(e);
@@ -58,6 +60,7 @@ export default function Login() {
 
     // If all data is valid, proceed with login
     handleSignIn();
+
     setEmail("");
     setPassword("");
     // Add your login logic here
@@ -67,7 +70,7 @@ export default function Login() {
     <div className="bg-[#edeced] h-screen flex justify-center items-center ">
       <div className="bg-white w-[560px] rounded-xl p-4 flex flex-col justify-center items-center">
         <div className="flex flex-col justify-center items-center">
-          <h1 className=" font-bold text-3xl mt-5 text-blue-700 ">Sign In</h1>
+          <h1 className=" font-bold text-3xl mt-5 text-blue-700 ">LOGIN</h1>
           <div className="block w-auto h-auto mb-4 mt-5">
             <input
               type="email"
@@ -115,9 +118,11 @@ export default function Login() {
 
         <div className="flex justify-start w-[400px] p-1 mb-6">
           <p className="text-[16px] font-normal">Don't have an account? </p>
-          <p className="text-[16px] font-semibold text-blue-700 ml-2">
-            Register
-          </p>
+          <Link href="/register">
+            <p className="text-[16px] font-semibold text-blue-700 ml-2">
+              Register
+            </p>
+          </Link>
         </div>
       </div>
     </div>
