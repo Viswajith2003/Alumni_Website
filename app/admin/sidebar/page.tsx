@@ -1,12 +1,12 @@
 import React from "react";
-import Data from "./data.js"
+import Data from "./data.js";
 
 export default function Sidebar({ sidebarToggle }) {
   return (
     <div
       className={`${
         sidebarToggle ? "hidden" : "block"
-      } w-64 bg-gray-800 fixed h-full px-4 py-2`}
+      } w-72 bg-gray-800 fixed h-full px-4 py-2`}
     >
       <div className=" mb-6 flex items-center justify-center">
         <h1 className="text-2xl text-white font-bold mt-5">ADMIN PANEL</h1>
