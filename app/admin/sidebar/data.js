@@ -46,3 +46,5 @@ const data = [
     icon: IoLogOutOutline,
   },
 ];
+
+export default data
