@@ -25,8 +25,8 @@ export default function Home() {
       {/* <Login /> */}
       {/* <ViewJob /> */}
       {/* <PostJob /> */}
-      {/* <HomePage /> */}
-      <AdminDash />
+      <HomePage />
+      {/* <AdminDash /> */}
     </div>
   );
 }

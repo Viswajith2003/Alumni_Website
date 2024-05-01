@@ -70,13 +70,16 @@ export default function HomeNav() {
           data-aos="zoom-in"
         >
           <Link href="/">
-            <div className="flex border-2 border-black rounded-lg">
+            <div className="relative md:w-65 border-2 h-10 border-blue-800 rounded-lg">
+              <span className="relative md:absolute inset-y-0 left-0 fkex items-center pl-2">
+                <button className="p-1 focus:outline-none text-white md:text-black mt-1">
+                  <FaSearch className="text-blue-800" />
+                </button>
+              </span>
               <input
-                type="search"
-                placeholder="Search"
-                className="px-3 p-1 h-10 w-52 rounded-lg"
+                type="text"
+                className="w-full px-4 py-1 pl-12 rounded shadow outline-none hidden md:block"
               />
-              <FaSearch className="mt-3 w-5 h-5 mr-4 text-gray-500 " />
             </div>
           </Link>
 
