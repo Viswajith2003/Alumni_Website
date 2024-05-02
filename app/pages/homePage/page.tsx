@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Typed from "typed.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Navbar from "../components/homeNav/page";
+import Navbar from "../../components/homeNav/page";
 
 const HomePage = () => {
   useEffect(() => {

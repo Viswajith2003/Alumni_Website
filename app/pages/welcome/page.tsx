@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import Typed from "typed.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Navbar from "../components/navbar/page";
+import Navbar from "../../components/navbar/page";
 
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../backend/firebase/config";
+import { auth } from "../../backend/firebase/config";
 import { useRouter } from "next/navigation";
 
 const Welcome = () => {
