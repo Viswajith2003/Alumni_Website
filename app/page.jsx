@@ -1,16 +1,16 @@
 import Welcome from "./welcome/page";
-import About from "./about/page";
-import Footer from "./footer/page";
-import Service from "./servicess/page";
-import Gallery from "./gallery/page";
-import Contact from "./contacts/page";
+import About from "./pages/about/page";
+import Footer from "./components/footer/page";
+import Service from "./pages/servicess/page";
+import Gallery from "./pages/gallery/page";
+import Contact from "./pages/contacts/page";
 import Register from "./register/page";
 import Login from "./login/page";
 import HomePage from "./homePage/page";
-import ViewJob from "./viewJob/page";
-import PostJob from "./postJob/page";
-import HomeNav from "./homeNav/page";
-import AdminDash from "./admin/page";
+import ViewJob from "./pages/viewJob/page";
+import PostJob from "./pages/postJob/page";
+import HomeNav from "./components/homeNav/page";
+import AdminDash from "./pages/admin/page";
 
 export default function Home() {
   return (

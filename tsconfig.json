@@ -24,7 +24,7 @@
     "**/*.ts",
     "**/*.tsx",
     "app/register/page.jsx",
-    "app/firebase/config.ts"
+    "app/backend/firebase/config.ts"
   ],
   "exclude": ["node_modules"]
 }

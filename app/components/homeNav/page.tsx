@@ -6,7 +6,7 @@ import Link from "next/link";
 import { AiOutlineMenu } from "react-icons/ai";
 
 import { signOut } from "firebase/auth";
-import { auth } from "../firebase/config";
+import { auth } from "../../backend/firebase/config";
 
 export default function HomeNav() {
   const [menu, setMenu] = useState(false);
@@ -57,7 +57,7 @@ export default function HomeNav() {
             Gallery
           </Link>
           <Link
-            href="/"
+            href="/profile"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
