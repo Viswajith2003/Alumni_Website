@@ -10,9 +10,14 @@ import { auth } from "../../backend/firebase/config";
 
 export default function HomeNav() {
   const [menu, setMenu] = useState(false);
+  const [jobsMenu, setJobsMenu] = useState(false); // To handle dropdown visibility
 
   const handleChange = () => {
     setMenu(!menu);
+  };
+
+  const toggleJobsMenu = () => {
+    setJobsMenu(!jobsMenu);
   };
 
   return (
@@ -28,7 +33,7 @@ export default function HomeNav() {
         <nav className="hidden lg:flex flex-row items-center gap-6 font-bold text-xl ">
           <Link
             href="/"
-            className="text-blue-800"
+            className="text-blue-800 hover:scale-95"
             data-aos="zoom-out-down"
             data-aos-duration="3000"
           >
@@ -36,29 +41,48 @@ export default function HomeNav() {
           </Link>
           <Link
             href="/"
-            className=" hover:text-blue-800"
+            className=" hover:text-blue-800 hover:scale-95"
             data-aos="zoom-out-down"
           >
             Events
           </Link>
-          <Link
-            href="/"
-            className="flex hover:text-blue-800"
-            data-aos="zoom-out-down"
-          >
-            Jobs
-            <RiArrowDropDownLine className="mt-1 w-6 h-6" />
-          </Link>
+          <div className="relative flex items-center">
+            {/* Jobs button with dropdown */}
+            <button
+              onClick={toggleJobsMenu}
+              className="flex hover:text-blue-800"
+              data-aos="zoom-out-down"
+            >
+              Jobs
+              <RiArrowDropDownLine className="mt-1 w-6 h-6 hover:scale-95" />
+            </button>
+            {jobsMenu && ( // Display the dropdown menu if jobsMenu is true
+              <div className="absolute top-full left-8 bg-gray-100 shadow-lg p-2 rounded w-40">
+                <Link
+                  href="/pages/viewJob"
+                  className="block px-4 py-2 text-black hover:text-blue-800 hover:scale-95"
+                >
+                  View-Jobs
+                </Link>
+                <Link
+                  href="/pages/postJob"
+                  className="block px-4 py-2 text-black hover:text-blue-800 hover:scale-95"
+                >
+                  Post-Jobs
+                </Link>
+              </div>
+            )}
+          </div>
           <Link
             href="/gallary"
-            className=" hover:text-blue-800"
+            className=" hover:text-blue-800 hover:scale-95"
             data-aos="zoom-out-down"
           >
             Gallery
           </Link>
           <Link
-            href="/profile"
-            className=" hover:text-blue-800"
+            href="/pages/profile"
+            className=" hover:text-blue-800 hover:scale-95"
             data-aos="zoom-out-down"
           >
             Profile
@@ -91,7 +115,7 @@ export default function HomeNav() {
                 sessionStorage.removeItem("user");
               }}
             >
-              <h1 className="font-bold ">Logout</h1>
+              <h1 className="font-bold hover:scale-95">Logout</h1>
             </button>
           </Link>
         </div>
@@ -108,24 +132,52 @@ export default function HomeNav() {
           menu ? "translate-x-0" : "-translate-x-full"
         } lg:hidden flex flex-col absolute bg-darkBackground text-white bg-white left-0 top-20 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
       >
-        <Link href="/hero" className="text-blue-800">
+        <Link href="/hero" className="text-blue-800 hover:scale-95">
           Home
         </Link>
-        <Link href="/about" className="text-black hover:text-blue-800">
+        <Link
+          href="/about"
+          className="text-black hover:text-blue-800 hover:scale-95"
+        >
           Events
         </Link>
-        <Link
-          href="/servicess"
-          className="flex ml-[340px] text-black hover:text-blue-800"
-        >
-          Jobs
-          <RiArrowDropDownLine className="mt-1 w-6 h-6" />
-        </Link>
 
-        <Link href="/gallery" className="text-black hover:text-blue-800">
+        <div className="flex justify-center">
+          <button
+            onClick={toggleJobsMenu}
+            className="flex text-black hover:text-blue-800 hover:scale-95"
+          >
+            Jobs
+            <RiArrowDropDownLine className="mt-1 w-6 h-6 hover:scale-95" />
+          </button>
+          {jobsMenu && (
+            <div className="absolute bg-white text-black shadow-lg w-40">
+              <Link
+                href="/pages/viewJob"
+                className="block px-4 py-2 hover:bg-gray-100 hover:scale-95"
+              >
+                View-Jobs
+              </Link>
+              <Link
+                href="/pages/postJob"
+                className="block px-4 py-2 hover:bg-gray-100 hover:scale-95"
+              >
+                Post-Jobs
+              </Link>
+            </div>
+          )}
+        </div>
+
+        <Link
+          href="/gallery"
+          className="text-black hover:text-blue-800 hover:scale-95"
+        >
           Gallery
         </Link>
-        <Link href="/contacts" className="text-black hover:text-blue-800">
+        <Link
+          href="/contacts"
+          className="text-black hover:text-blue-800 hover:scale-95"
+        >
           Profile
         </Link>
       </div>
