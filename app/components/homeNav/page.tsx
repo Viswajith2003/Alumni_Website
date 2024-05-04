@@ -74,7 +74,7 @@ export default function HomeNav() {
             )}
           </div>
           <Link
-            href="/gallary"
+            href="/pages/gallery"
             className=" hover:text-blue-800 hover:scale-95"
             data-aos="zoom-out-down"
           >
