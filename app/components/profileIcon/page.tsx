@@ -19,7 +19,7 @@ export default function ProfilePhotoUpload() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
-      {" "}
+      
       {/* Center content */}
       <input
         type="file"
@@ -30,7 +30,7 @@ export default function ProfilePhotoUpload() {
       <div className="text-center flex flex-col items-center">
         {/* Profile Photo Preview */}
         <div className="mt-2 w-40 h-40 rounded-full bg-gray-200 flex items-center justify-center border-2 border-gray-400">
-          {" "}
+         
           {/* Default styling */}
           {photoPreview ? ( // Check if there's a preview
             <div
