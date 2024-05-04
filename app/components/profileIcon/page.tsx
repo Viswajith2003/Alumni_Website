@@ -1,11 +1,10 @@
 "use client"; // Required for client-side component in Next.js
 import React, { useState, useRef } from "react";
 
-export default function ProfilePhotoUpload() {
+export default function ProfileIcon() {
   const [photoPreview, setPhotoPreview] = useState(null); // State for the photo preview
   const fileInputRef = useRef(null); // Reference to the hidden file input
 
-  // Handle file input changes to update the preview
   const handleFileChange = (e) => {
     const file = e.target.files[0]; // Get the first file from the input
     if (file) {
@@ -18,19 +17,16 @@ export default function ProfilePhotoUpload() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full">
-      
-      {/* Center content */}
+    <div className="flex flex-col justify-center items-center text-center">
       <input
         type="file"
-        className="hidden" // Hidden input for file upload
+        className="hidden " // Hidden input for file upload
         ref={fileInputRef} // Reference to the file input
         onChange={handleFileChange} // Triggered when a new file is selected
       />
-      <div className="text-center flex flex-col items-center">
+      <div className="text-center flex flex-col items-center mt-8">
         {/* Profile Photo Preview */}
         <div className="mt-2 w-40 h-40 rounded-full bg-gray-200 flex items-center justify-center border-2 border-gray-400">
-         
           {/* Default styling */}
           {photoPreview ? ( // Check if there's a preview
             <div
@@ -46,14 +42,35 @@ export default function ProfilePhotoUpload() {
           )}
         </div>
 
-        {/* Button to select a new photo */}
-        <button
-          className="mt-4 px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-gray-700 shadow-sm hover:bg-gray-100 transition duration-150"
-          onClick={() => fileInputRef.current.click()} // Trigger the file input
-        >
-          Select New Photo
-        </button>
+        <h1 className="mt-5 text-2xl font-bold mb-3">Viswajith vp</h1>
+        <p className="text-xl">
+          Hi, I am student of Govt.Engineering College Sreekrishnapuram
+          ,Palakkad
+        </p>
+        <div className="space-y-2 mt-5">
+          <div className="flex gap-3">
+            <button
+              className="p-2 bg-blue-600 text-white rounded-lg hover:scale-95"
+              onClick={() => fileInputRef.current.click()}
+            >
+              Update Profile Image
+            </button>
+            <button className="p-2 bg-blue-600 text-white rounded-lg hover:scale-95">
+              Update Profile details
+            </button>
+          </div>
+          <div className="flex justify-center items-center gap-3 ">
+            <button className="p-2 bg-blue-600 text-white rounded-lg hover:scale-95">
+              Change Password
+            </button>
+            <button className="p-2 bg-blue-600 text-white rounded-lg hover:scale-95">
+              Delete Account
+            </button>
+          </div>
+        </div>
       </div>
+      {/* Form */}
+      <div className=""></div>
     </div>
   );
 }
