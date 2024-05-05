@@ -17,7 +17,7 @@ export default function ProfileIcon() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center text-center p-2">
+    <div className="flex flex-col justify-center items-center text-center p-2 text-white">
       <input
         type="file"
         className="hidden " // Hidden input for file upload
@@ -38,14 +38,14 @@ export default function ProfileIcon() {
               }}
             />
           ) : (
-            <span>No Image</span> // Default text if there's no preview
+            <span className="text-black">No Image</span> // Default text if there's no preview
           )}
         </div>
 
-        <h1 className="mt-5 text-2xl font-bold mb-3">Viswajith vp</h1>
+        <h1 className="mt-5 text-4xl font-bold mb-3 ">Viswajith vp</h1>
         <p className="text-xl">
           Hi, I am student of Govt.Engineering College <br /> Sreekrishnapuram
-        ,Palakkad
+          ,Palakkad
         </p>
         <div className="space-y-2 mt-5">
           <div className="flex gap-3">
