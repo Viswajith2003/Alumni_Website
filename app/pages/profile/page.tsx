@@ -9,6 +9,9 @@ function Profile() {
       </div>
       <div className="form bg-slate-500 p-4 w-[1000px]">
         <h1 className="text-4xl font-bold">Personal Details</h1>
+        <form>
+            
+        </form>
       </div>
     </div>
   );
