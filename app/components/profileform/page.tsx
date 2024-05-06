@@ -26,10 +26,10 @@ export default function ProfileForm() {
 
   return (
     <form
-      className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg"
+      className="max-w-3xl mx-auto p-6 bg-[#c0c2c8] shadow-md rounded-lg w-[900px]"
       onSubmit={handleSubmit}
     >
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
+      <h2 className="text-3xl font-semibold mb-6 text-gray-800 text-center">
         Personal Details
       </h2>
 
