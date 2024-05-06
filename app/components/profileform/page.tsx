@@ -1,14 +1,16 @@
-// components/PersonalDetailsForm.jsx
-"use client"; // To allow for client-side state management in Next.js
+"use client"; // Required for client-side state management in Next.js
 import React, { useState } from "react";
 
-export default function PersonalDetailsForm() {
+export default function ProfileForm() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     address: "",
+    dob: "", // Date of Birth
+    passOutYear: "", // PassOut Year
+    skills: "", // Skills
   });
 
   const handleChange = (e) => {
@@ -27,7 +29,9 @@ export default function PersonalDetailsForm() {
       className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg"
       onSubmit={handleSubmit}
     >
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">Personal Details</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
+        Personal Details
+      </h2>
 
       {/* First and Last Name */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -103,6 +107,53 @@ export default function PersonalDetailsForm() {
           name="address"
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={formData.address}
+          onChange={handleChange}
+          rows={3}
+        />
+      </div>
+
+      {/* Date of Birth (DOB) */}
+      <div className="mt-4">
+        <label className="block text-gray-700 mb-2" htmlFor="dob">
+          Date of Birth
+        </label>
+        <input
+          type="date"
+          id="dob"
+          name="dob"
+          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={formData.dob}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* PassOut Year */}
+      <div className="mt-4">
+        <label className="block text-gray-700 mb-2" htmlFor="passOutYear">
+          PassOut Year
+        </label>
+        <input
+          type="number"
+          id="passOutYear"
+          name="passOutYear"
+          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={formData.passOutYear}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      {/* Skills */}
+      <div className="mt-4">
+        <label className="block text-gray-700 mb-2" htmlFor="skills">
+          Skills
+        </label>
+        <textarea
+          id="skills"
+          name="skills"
+          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={formData.skills}
           onChange={handleChange}
           rows={3}
         />
