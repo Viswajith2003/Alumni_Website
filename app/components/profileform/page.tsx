@@ -34,7 +34,7 @@ export default function ProfileForm() {
       </h2>
 
       {/* First and Last Name */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black">
         <div>
           <label className="block text-gray-700 mb-2" htmlFor="firstName">
             First Name
