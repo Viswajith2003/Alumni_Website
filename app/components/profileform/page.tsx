@@ -8,25 +8,24 @@ export default function ProfileForm() {
     email: "",
     phone: "",
     address: "",
-    dob: "", // Date of Birth
-    passOutYear: "", // PassOut Year
-    skills: "", // Skills
+    dob: "",
+    passOutYear: "",
+    skills: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value }); // Update the corresponding field
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    // Perform form submission logic, like API call to save data
+    e.preventDefault();
     console.log("Form Data:", formData);
   };
 
   return (
     <form
-      className="max-w-3xl mx-auto p-6 bg-[#c0c2c8] shadow-md rounded-lg w-[900px]"
+      className="max-w-3xl mx-auto p-6 bg-[#c0c2c8] shadow-md rounded-lg"
       onSubmit={handleSubmit}
     >
       <h2 className="text-3xl font-semibold mb-6 text-gray-800 text-center">
@@ -112,7 +111,7 @@ export default function ProfileForm() {
         />
       </div>
 
-      {/* Date of Birth (DOB) */}
+      {/* Date of Birth */}
       <div className="mt-4">
         <label className="block text-gray-700 mb-2" htmlFor="dob">
           Date of Birth
@@ -128,10 +127,10 @@ export default function ProfileForm() {
         />
       </div>
 
-      {/* PassOut Year */}
+      {/* Pass-Out Year */}
       <div className="mt-4">
         <label className="block text-gray-700 mb-2" htmlFor="passOutYear">
-          PassOut Year
+          Pass-Out Year
         </label>
         <input
           type="number"
