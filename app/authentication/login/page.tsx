@@ -118,7 +118,7 @@ export default function Login() {
 
         <div className="flex justify-start w-[400px] p-1 mb-6">
           <p className="text-[16px] font-normal">Don't have an account? </p>
-          <Link href="/register">
+          <Link href="/authentication/register">
             <p className="text-[16px] font-semibold text-blue-700 ml-2">
               Register
             </p>
