@@ -69,7 +69,7 @@ export default function navbar() {
             </button>
           </Link>
 
-          <Link href="/screens/main_admin_screen">
+          <Link href="/authentication/admin_login">
             <button className="bg-blue-700 p-1 h-10 w-20 rounded-lg hover:text-[15px] hover:scale-95">
               <h1 className="text-white font-bold">Admin</h1>
             </button>
