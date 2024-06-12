@@ -18,7 +18,7 @@ const HomePage = () => {
     });
 
     return () => {
-      // Destroy Typed.js instance on component unmount
+     
       typed.destroy();
     };
   }, []);

@@ -4,6 +4,7 @@ import MainWelcomeScreen from "./screens/main_welcome_screen/page";
 import MainHomeScreen from "./screens/main_home_screen/page";
 
 export default function Home() {
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -12,4 +13,5 @@ export default function Home() {
   }, []);
 
   return <main>{isLoggedIn ? <MainHomeScreen /> : <MainWelcomeScreen />}</main>;
+
 }
