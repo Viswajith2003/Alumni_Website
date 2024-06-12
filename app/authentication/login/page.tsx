@@ -10,6 +10,7 @@ export default function Login() {
   interface Errors {
     email?: string;
     password?: string;
+    general?: string;
   }
 
   // State variables for input values and errors
@@ -24,46 +25,43 @@ export default function Login() {
   const handleSignIn = async () => {
     try {
       const res = await signInWithEmailAndPassword(email, password);
-      console.log({ res });
-      console.log({ email, password });
-      sessionStorage.setItem("user", "true");
-      router.push("/homePage");
+      if (res.user) {
+        sessionStorage.setItem("user", "true");
+        setEmail("");
+        setPassword("");
+        router.push("/screens/main_home_screen");
+      } else {
+        console.error("User is not signed in");
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          general: "Something went wrong",
+        }));
+      }
     } catch (e) {
-      console.error(e);
+      setErrors((prevErrors) => ({ ...prevErrors, general: e.message }));
     }
   };
 
-  // Validation function for email format
   const validateEmail = (email: string) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
   };
 
-  // Function to handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: Errors = {};
 
-    // Validation logic for each input
     if (!validateEmail(email)) {
       newErrors.email = "Invalid email address";
     }
     if (password.length < 6) {
       newErrors.password = "Password must be at least 6 characters long";
     }
-
-    // If there are errors, update state and prevent submission
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
-    // If all data is valid, proceed with login
     handleSignIn();
-
-    setEmail("");
-    setPassword("");
-    // Add your login logic here
   };
 
   return (
@@ -115,10 +113,13 @@ export default function Login() {
         >
           <h1 className="text-2xl font-bold">Login </h1>
         </button>
+        {errors.general && (
+          <p className="text-red-600 text-left mt-4">{errors.general}</p>
+        )}
 
         <div className="flex justify-start w-[400px] p-1 mb-6">
           <p className="text-[16px] font-normal">Don't have an account? </p>
-          <Link href="/register">
+          <Link href="/authentication/register">
             <p className="text-[16px] font-semibold text-blue-700 ml-2">
               Register
             </p>

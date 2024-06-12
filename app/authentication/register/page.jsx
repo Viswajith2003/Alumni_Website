@@ -21,11 +21,14 @@ export default function Register() {
   const handleSignUp = async () => {
     try {
       const res = await createUserWithEmailAndPassword(email, password);
-      console.log({ res });
-      console.log({ name, email, phone, password });
-      router.push("/login");
+      if (res.user) {
+        clearForm();
+        router.push("/authentication/login");
+      } else {
+        setErrors({ general: "Something went wrong" });
+      }
     } catch (e) {
-      console.error(e);
+      setErrors({ general: e.message });
     }
   };
 
@@ -82,7 +85,6 @@ export default function Register() {
     // If all data is valid, proceed with registration
 
     handleSignUp();
-    clearForm();
 
     // Add your registration logic here
   };
@@ -152,6 +154,9 @@ export default function Register() {
               <p className="text-red-600 text-left">{errors.repeatPassword}</p>
             )}
           </div>
+          {errors.general && (
+            <p className="text-red-600 text-left mt-4">{errors.general}</p>
+          )}
         </div>
         <button
           onClick={handleSubmit}
@@ -162,7 +167,7 @@ export default function Register() {
 
         <div className="flex justify-start w-[400px] p-1 mb-6">
           <p className="text-[16px] font-normal">Already have an account? </p>
-          <Link href="/login">
+          <Link href="/authentication/login">
             <p className="text-[16px] font-semibold text-blue-700 ml-2">
               Login
             </p>
