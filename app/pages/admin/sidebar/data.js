@@ -14,29 +14,31 @@ const data = [
     icon: AiOutlineDashboard,
   },
   {
-    name: "User",
+    name: "Alumni List",
     icon: HiUser,
+  },
+  {
+    name: "Gallery",
+    icon: GrGallery,
   },
   {
     name: "Add Event",
     icon: PiNotepad,
   },
   {
+    name: "Jobs",
+    icon: FaUserGraduate,
+  },
+  {
     name: "Feedback",
     icon: FaRegMessage,
   },
-  {
-    name: "Job",
-    icon: FaUserGraduate,
-  },
+
   {
     name: "Share Idea",
     icon: IoShareSocialOutline,
   },
-  {
-    name: "Gallery",
-    icon: GrGallery,
-  },
+
   {
     name: "Send Mail",
     icon: MdOutgoingMail,
@@ -47,4 +49,4 @@ const data = [
   },
 ];
 
-export default data
+export default data;
