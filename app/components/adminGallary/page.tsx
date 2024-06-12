@@ -1,9 +1,26 @@
 "use client";
 // pages/gallery-edit.js
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function GalleryEdit() {
   const [gallery, setGallery] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentItem, setCurrentItem] = useState({
+    id: null,
+    img: "",
+    galleryName: "",
+  });
+
+  useEffect(() => {
+    // Retrieve gallery from local storage on component mount
+    const savedGallery = JSON.parse(localStorage.getItem("gallery")) || [];
+    setGallery(savedGallery);
+  }, []);
+
+  useEffect(() => {
+    // Save gallery to local storage whenever it changes
+    localStorage.setItem("gallery", JSON.stringify(gallery));
+  }, [gallery]);
 
   const handleUpload = (event) => {
     event.preventDefault();
@@ -12,12 +29,22 @@ export default function GalleryEdit() {
 
     if (file && galleryName) {
       const newImage = {
-        id: gallery.length + 1,
+        id: isEditing ? currentItem.id : gallery.length + 1,
         img: URL.createObjectURL(file),
         galleryName,
       };
 
-      setGallery([...gallery, newImage]);
+      if (isEditing) {
+        setGallery(
+          gallery.map((item) => (item.id === currentItem.id ? newImage : item))
+        );
+        setIsEditing(false);
+        setCurrentItem({ id: null, img: "", galleryName: "" });
+      } else {
+        setGallery([...gallery, newImage]);
+      }
+
+      event.target.reset();
     }
   };
 
@@ -25,16 +52,18 @@ export default function GalleryEdit() {
     setGallery(gallery.filter((item) => item.id !== id));
   };
 
-  const handleEdit = (id) => {
-    // Edit functionality can be added here
-    console.log("Edit", id);
+  const handleEdit = (item) => {
+    setIsEditing(true);
+    setCurrentItem(item);
   };
 
   return (
-    <div className="container mx-auto p-4 flex">
+    <div className="container mx-auto p-4">
       {/* Image Uploading Section */}
       <div className="mb-8 p-4 border rounded shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">Upload Image</h2>
+        <h2 className="text-xl font-semibold mb-4">
+          {isEditing ? "Edit Image" : "Upload Image"}
+        </h2>
         <form onSubmit={handleUpload} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -44,7 +73,7 @@ export default function GalleryEdit() {
               type="file"
               name="image"
               className="mt-1 p-2 border rounded w-full"
-              required
+              required={!isEditing}
             />
           </div>
           <div>
@@ -54,6 +83,7 @@ export default function GalleryEdit() {
             <input
               type="text"
               name="galleryName"
+              defaultValue={currentItem.galleryName}
               className="mt-1 p-2 border rounded w-full"
               required
             />
@@ -62,7 +92,7 @@ export default function GalleryEdit() {
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded"
           >
-            Upload
+            {isEditing ? "Update" : "Upload"}
           </button>
         </form>
       </div>
@@ -105,7 +135,7 @@ export default function GalleryEdit() {
                 </td>
                 <td className="px-6 py-4 border-b border-gray-300">
                   <button
-                    onClick={() => handleEdit(item.id)}
+                    onClick={() => handleEdit(item)}
                     className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
                   >
                     Edit
