@@ -15,7 +15,7 @@ import AdminDash from "./pages/admin/page";
 export default function Home() {
   return (
     <div>
-      {/* <Welcome /> */}
+      <Welcome />
       {/* <About /> */}
       {/* <Service /> */}
       {/* <Gallery /> */}
@@ -25,7 +25,7 @@ export default function Home() {
       {/* <Login /> */}
       {/* <ViewJob /> */}
       {/* <PostJob /> */}
-      <HomePage />
+      {/* <HomePage /> */}
       {/* <AdminDash /> */}
     </div>
   );
