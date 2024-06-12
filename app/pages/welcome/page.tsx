@@ -5,21 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Navbar from "../../components/navbar/page";
 
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../backend/firebase/config";
-import { useRouter } from "next/navigation";
-
 const Welcome = () => {
-  const [user] = useAuthState(auth);
-  const router = useRouter();
-  const userSession = sessionStorage.getItem("user");
-
-  console.log({ user });
-
-  if (user && userSession) {
-    router.push("/homePage");
-  }
-
   useEffect(() => {
     AOS.init({ duration: 2000 });
 

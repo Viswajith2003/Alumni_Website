@@ -21,11 +21,14 @@ export default function Register() {
   const handleSignUp = async () => {
     try {
       const res = await createUserWithEmailAndPassword(email, password);
-      console.log({ res });
-      console.log({ name, email, phone, password });
-      router.push("/login");
+      if (res.user) {
+        clearForm();
+        router.push("/authentication/login");
+      } else {
+        setErrors({ general: "Something went wrong" });
+      }
     } catch (e) {
-      console.error(e);
+      setErrors({ general: e.message });
     }
   };
 
@@ -82,7 +85,6 @@ export default function Register() {
     // If all data is valid, proceed with registration
 
     handleSignUp();
-    clearForm();
 
     // Add your registration logic here
   };
@@ -152,6 +154,9 @@ export default function Register() {
               <p className="text-red-600 text-left">{errors.repeatPassword}</p>
             )}
           </div>
+          {errors.general && (
+            <p className="text-red-600 text-left mt-4">{errors.general}</p>
+          )}
         </div>
         <button
           onClick={handleSubmit}
