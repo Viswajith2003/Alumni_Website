@@ -43,7 +43,7 @@ const PostJob = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
-      <h2 className="text-4xl font-semibold mb-6 text-blue-500">
+      <h2 className="text-4xl font-semibold mb-10 text-blue-500">
         Post a Job Opportunity
       </h2>
       <form
@@ -161,7 +161,7 @@ const PostJob = () => {
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded"
           >
-            Post
+            <h1 className="text-xl font-bold w-20">Post</h1>
           </button>
         </div>
       </form>
