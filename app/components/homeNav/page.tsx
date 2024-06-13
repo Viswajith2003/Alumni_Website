@@ -40,7 +40,7 @@ export default function HomeNav() {
             Home
           </Link>
           <Link
-            href="/"
+            href="/pages/alumniList"
             className=" hover:text-blue-800 hover:scale-95"
             data-aos="zoom-out-down"
           >
