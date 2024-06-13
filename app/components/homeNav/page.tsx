@@ -47,7 +47,7 @@ export default function HomeNav() {
             Alumni
           </Link>
           <Link
-            href="/"
+            href="/pages/eventList"
             className=" hover:text-blue-800 hover:scale-95"
             data-aos="zoom-out-down"
           >
