@@ -20,7 +20,8 @@ const AlumniList = () => {
       <div
         className="relative bg-cover bg-center h-64"
         style={{
-          backgroundImage: "url('https://via.placeholder.com/1200x300')",
+          backgroundImage:
+            "url('https://upload.wikimedia.org/wikipedia/commons/0/06/Central_Stair_Case_of_GEC_Palakkad.png')",
         }}
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
