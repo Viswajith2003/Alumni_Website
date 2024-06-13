@@ -1,5 +1,11 @@
-"use client"; // Required for client-side state management in Next.js
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import {
+  setUserProfile,
+  getUserProfile,
+  setUserProfile2,
+  getUserProfile2,
+} from "../../backend/firebase/globalState";
 
 export default function ProfileForm() {
   const [formData, setFormData] = useState({
@@ -13,6 +19,25 @@ export default function ProfileForm() {
     skills: "",
   });
 
+  useEffect(() => {
+    const profile = getUserProfile();
+    const profile2 = getUserProfile2();
+
+    // Set formData with correct handling of middleName
+    setFormData({
+      firstName: profile.name || "",
+      lastName:
+        (profile.middleName ? profile.middleName + " " : "") +
+        (profile.lastName || ""),
+      email: profile.email || "",
+      phone: profile.phone || "",
+      address: profile2.address || "",
+      dob: profile2.dob || "",
+      passOutYear: profile.batch || "",
+      skills: profile2.skills || "",
+    });
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -21,6 +46,18 @@ export default function ProfileForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data:", formData);
+    setUserProfile({
+      name: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      batch: formData.passOutYear,
+    });
+    setUserProfile2({
+      address: formData.address,
+      dob: formData.dob,
+      skills: formData.skills,
+    });
   };
 
   return (
@@ -65,7 +102,7 @@ export default function ProfileForm() {
       </div>
 
       {/* Email */}
-      <div className="mt-4">
+      <div className="mt-4 text-black">
         <label className="block text-gray-700 mb-2" htmlFor="email">
           Email
         </label>
@@ -81,7 +118,7 @@ export default function ProfileForm() {
       </div>
 
       {/* Phone */}
-      <div className="mt-4">
+      <div className="mt-4 text-black">
         <label className="block text-gray-700 mb-2" htmlFor="phone">
           Phone
         </label>
@@ -97,7 +134,7 @@ export default function ProfileForm() {
       </div>
 
       {/* Address */}
-      <div className="mt-4">
+      <div className="mt-4 text-black">
         <label className="block text-gray-700 mb-2" htmlFor="address">
           Address
         </label>
@@ -112,7 +149,7 @@ export default function ProfileForm() {
       </div>
 
       {/* Date of Birth */}
-      <div className="mt-4">
+      <div className="mt-4 text-black">
         <label className="block text-gray-700 mb-2" htmlFor="dob">
           Date of Birth
         </label>
@@ -128,7 +165,7 @@ export default function ProfileForm() {
       </div>
 
       {/* Pass-Out Year */}
-      <div className="mt-4">
+      <div className="mt-4 text-black">
         <label className="block text-gray-700 mb-2" htmlFor="passOutYear">
           Pass-Out Year
         </label>
@@ -144,7 +181,7 @@ export default function ProfileForm() {
       </div>
 
       {/* Skills */}
-      <div className="mt-4">
+      <div className="mt-4 text-black">
         <label className="block text-gray-700 mb-2" htmlFor="skills">
           Skills
         </label>

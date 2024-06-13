@@ -1,9 +1,20 @@
 "use client"; // Required for client-side component in Next.js
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  setUserProfile,
+  getUserProfile,
+} from "../../backend/firebase/globalState";
 
 export default function ProfileIcon() {
   const [photoPreview, setPhotoPreview] = useState(null); // State for the photo preview
   const fileInputRef = useRef(null); // Reference to the hidden file input
+
+  useEffect(() => {
+    const profile = getUserProfile();
+    if (profile.imageUrl) {
+      setPhotoPreview(profile.imageUrl); // Set photo preview with imageUrl from global state
+    }
+  }, []);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]; // Get the first file from the input
@@ -11,6 +22,8 @@ export default function ProfileIcon() {
       const reader = new FileReader(); // Initialize FileReader
       reader.onload = (e) => {
         setPhotoPreview(e.target.result); // Update the photo preview with base64 data
+        // Update global state with new imageUrl
+        setUserProfile({ imageUrl: e.target.result });
       };
       reader.readAsDataURL(file); // Convert the file to base64
     }
