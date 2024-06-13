@@ -44,6 +44,13 @@ export default function HomeNav() {
             className=" hover:text-blue-800 hover:scale-95"
             data-aos="zoom-out-down"
           >
+            Alumni
+          </Link>
+          <Link
+            href="/"
+            className=" hover:text-blue-800 hover:scale-95"
+            data-aos="zoom-out-down"
+          >
             Events
           </Link>
           <div className="relative flex items-center">

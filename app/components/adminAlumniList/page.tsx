@@ -35,7 +35,7 @@ const AlumniList = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-semibold mb-4">Alumni List</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center">Alumni List</h2>
       <table className="min-w-full bg-white border">
         <thead>
           <tr>
@@ -79,7 +79,7 @@ const AlumniList = () => {
                 {alumni.passoutYear}
               </td>
               <td className="px-6 py-4 border-b border-gray-300">
-                {alumni.verified ? "Verified" : "Not Verified"}
+                {alumni.verified ? "Verified"  : "Not Verified"}
               </td>
               <td className="px-6 py-4 border-b border-gray-300">
                 <button
