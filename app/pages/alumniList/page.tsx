@@ -2,25 +2,7 @@
 
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import alumniData from "./data.js"
-
-const alumniData = [
-  {
-    id: 1,
-    avatar: "https://via.placeholder.com/50",
-    name: "John Doe",
-    passoutYear: 2020,
-    verified: true,
-  },
-  {
-    id: 2,
-    avatar: "https://via.placeholder.com/50",
-    name: "Jane Smith",
-    passoutYear: 2018,
-    verified: false,
-  },
-  // Add more alumni data here
-];
+import alumniData from "./data"; // Import the alumni data from the separate file
 
 const AlumniList = () => {
   const [searchTerm, setSearchTerm] = useState("");
