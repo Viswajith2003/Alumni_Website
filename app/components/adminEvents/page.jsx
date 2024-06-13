@@ -76,9 +76,9 @@ const EventLists = () => {
   };
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-row">
       {/* First div for event form */}
-      <div className=" p-4">
+      <div className="p-4">
         <h2 className="text-2xl text-center font-semibold mb-4">
           {isEditing ? "Edit Event" : "Create New Event"}
         </h2>
