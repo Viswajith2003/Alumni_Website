@@ -1,7 +1,7 @@
 "use client"; // Correctly specify this as a client component
 
 import React, { useState } from "react";
-import { SearchIcon } from "@heroicons/react/solid";
+import { FaSearch } from "react-icons/fa";
 
 const alumniData = [
   {
@@ -56,33 +56,33 @@ const AlumniList = () => {
             className="p-2 border-none outline-none"
           />
           <button className="p-2 bg-blue-500 text-white">
-            <SearchIcon className="h-6 w-6" />
+            <FaSearch className="h-6 w-6" />
           </button>
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {filteredAlumni.map((alumnus) => (
-          <div
-            key={alumnus.id}
-            className="bg-white shadow-md rounded-lg m-4 p-6 w-80"
-          >
-            <div className="flex items-center">
+          <div key={alumnus.id} className="bg-white p-4 rounded-lg shadow-md">
+            <div className="flex items-center space-x-4">
               <img
                 src={alumnus.avatar}
                 alt={alumnus.name}
-                className="w-16 h-16 rounded-full mr-4"
+                className="w-12 h-12 rounded-full"
               />
               <div>
-                <h2 className="text-xl font-semibold">{alumnus.name}</h2>
-                <p>Passout Year: {alumnus.passoutYear}</p>
-                <p>Status: {alumnus.verified ? "Verified" : "Not Verified"}</p>
+                <h2 className="text-lg font-semibold">{alumnus.name}</h2>
+                <p className="text-gray-500">
+                  Passout Year: {alumnus.passoutYear}
+                </p>
+                <p
+                  className={`text-sm font-semibold ${
+                    alumnus.verified ? "text-green-500" : "text-red-500"
+                  }`}
+                >
+                  {alumnus.verified ? "Verified" : "Not Verified"}
+                </p>
               </div>
-            </div>
-            <div className="mt-4">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">
-                View
-              </button>
             </div>
           </div>
         ))}
