@@ -5,6 +5,7 @@ import data from "./data"; // Adjust the import path as necessary
 const AlumniList = () => {
   // Define state variables for alumni list
   const [alumniList, setAlumniList] = useState([]);
+  const [selectedAlumni, setSelectedAlumni] = useState(null);
 
   // Fetch alumni data from data.js
   useEffect(() => {
@@ -13,12 +14,23 @@ const AlumniList = () => {
 
   // Function to handle view action
   const handleViewAlumni = (index) => {
-    const alumni = alumniList[index];
-    alert(
-      `Name: ${alumni.name}\nPassout Year: ${alumni.passoutYear}\nVerified: ${
-        alumni.verified ? "Yes" : "No"
-      }`
-    );
+    setSelectedAlumni(alumniList[index]);
+  };
+
+  // Function to handle close modal
+  const handleClose = () => {
+    setSelectedAlumni(null);
+  };
+
+  // Function to handle verify action
+  const handleVerify = () => {
+    if (selectedAlumni) {
+      const updatedAlumniList = alumniList.map((alumni) =>
+        alumni.id === selectedAlumni.id ? { ...alumni, verified: true } : alumni
+      );
+      setAlumniList(updatedAlumniList);
+      setSelectedAlumni(null);
+    }
   };
 
   return (
@@ -81,6 +93,57 @@ const AlumniList = () => {
           ))}
         </tbody>
       </table>
+
+      {selectedAlumni && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded shadow-lg w-1/2">
+            <h2 className="text-2xl font-semibold mb-4">Bio</h2>
+            <div className="flex items-center">
+              <img
+                src={selectedAlumni.avatar}
+                alt={selectedAlumni.name}
+                className="h-20 w-20 rounded-full mr-4"
+              />
+              <div className="flex-1">
+                <p>
+                  <strong>Name:</strong> {selectedAlumni.name}
+                </p>
+                <p>
+                  <strong>Email:</strong> {selectedAlumni.email}
+                </p>
+                <p>
+                  <strong>Batch:</strong> {selectedAlumni.passoutYear}
+                </p>
+              </div>
+              <div className="flex-1">
+                <p>
+                  <strong>Gender:</strong> {selectedAlumni.gender}
+                </p>
+                <p>
+                  <strong>Account Status:</strong>{" "}
+                  {selectedAlumni.verified ? "Verified" : "Not Verified"}
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-end mt-4">
+              {!selectedAlumni.verified && (
+                <button
+                  className="bg-green-500 text-white px-4 py-2 rounded mr-2"
+                  onClick={handleVerify}
+                >
+                  Verify
+                </button>
+              )}
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded"
+                onClick={handleClose}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
