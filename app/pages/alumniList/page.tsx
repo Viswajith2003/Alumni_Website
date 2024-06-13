@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import alumniData from "./data.js"
 
 const alumniData = [
   {
