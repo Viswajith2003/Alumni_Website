@@ -76,9 +76,9 @@ const EventLists = () => {
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex ">
       {/* First div for event form */}
-      <div className="p-4">
+      <div className="p-4 w-1/2">
         <h2 className="text-2xl text-center font-semibold mb-4">
           {isEditing ? "Edit Event" : "Create New Event"}
         </h2>
@@ -142,7 +142,7 @@ const EventLists = () => {
       </div>
 
       {/* Second div for gallery list */}
-      <div className="p-4">
+      <div className="p-4 w-full">
         <h2 className="text-2xl text-center font-semibold mb-4">
           Event Gallery
         </h2>
