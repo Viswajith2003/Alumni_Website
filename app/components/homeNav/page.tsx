@@ -1,7 +1,8 @@
 "use client";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { FaSearch } from "react-icons/fa";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../backend/AuthContext";
 import Link from "next/link";
 import { AiOutlineMenu } from "react-icons/ai";
 
@@ -18,6 +19,15 @@ export default function HomeNav() {
 
   const toggleJobsMenu = () => {
     setJobsMenu(!jobsMenu);
+  };
+  const { dispatch } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    signOut(auth);
+    sessionStorage.removeItem("user");
+    localStorage.clear();
+    sessionStorage.clear();
+    dispatch({ type: "LOGOUT" });
   };
 
   return (
@@ -117,10 +127,7 @@ export default function HomeNav() {
           <Link href="/">
             <button
               className="border-2 border-blue-800 p-1 h-10 w-20 rounded-lg hover:bg-blue-800 hover:text-white hover:text-[15px] hover:scale-95"
-              onClick={() => {
-                signOut(auth);
-                sessionStorage.removeItem("user");
-              }}
+              onClick={handleLogout}
             >
               <h1 className="font-bold hover:scale-95">Logout</h1>
             </button>

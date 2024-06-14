@@ -1,42 +1,42 @@
 "use client";
-import { useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useContext, useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../backend/firebase/config";
 import { useRouter } from "next/navigation";
+// import { AuthContext } from "../../backend/AuthContext";
 import Link from "next/link";
 
-export default function Login() {
+const Login = () => {
   // Define the type for errors state
   interface Errors {
     email?: string;
     password?: string;
     general?: string;
   }
+  // const { dispatch } = useContext(AuthContext);
 
-  // State variables for input values and errors
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
 
-  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
 
   const handleSignIn = async () => {
     try {
-      const res = await signInWithEmailAndPassword(email, password);
-      if (res.user) {
-        sessionStorage.setItem("user", "true");
-        setEmail("");
-        setPassword("");
-        router.push("/screens/main_home_screen");
-      } else {
-        console.error("User is not signed in");
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          general: "Something went wrong",
-        }));
-      }
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          // dispatch({ type: "LOGIN", payload: user });
+          console.log(user);
+          sessionStorage.setItem("user", "true");
+          setEmail("");
+          setPassword("");
+          router.push("/screens/main_home_screen");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (e) {
       setErrors((prevErrors) => ({ ...prevErrors, general: e.message }));
     }
@@ -128,4 +128,5 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+export default Login;

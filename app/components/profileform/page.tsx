@@ -1,14 +1,23 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  setUserProfile,
-  getUserProfile,
-  setUserProfile2,
-  getUserProfile2,
-} from "../../backend/firebase/globalState";
+import { doc, getDoc, setDoc, DocumentData } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { db } from "../../backend/firebase/config";
+
+type FormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  dob: string;
+  passOutYear: string;
+  skills: string;
+};
 
 export default function ProfileForm() {
-  const [formData, setFormData] = useState({
+  const [user, setUser] = useState(null);
+  const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
     email: "",
@@ -20,44 +29,50 @@ export default function ProfileForm() {
   });
 
   useEffect(() => {
-    const profile = getUserProfile();
-    const profile2 = getUserProfile2();
-
-    // Set formData with correct handling of middleName
-    setFormData({
-      firstName: profile.name || "",
-      lastName:
-        (profile.middleName ? profile.middleName + " " : "") +
-        (profile.lastName || ""),
-      email: profile.email || "",
-      phone: profile.phone || "",
-      address: profile2.address || "",
-      dob: profile2.dob || "",
-      passOutYear: profile.batch || "",
-      skills: profile2.skills || "",
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setUser(user);
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+        console.log({ userDocSnapshot });
+        const userData: FormData = { ...formData };
+        if (userDocSnapshot.exists()) {
+          const data = userDocSnapshot.data() as FormData;
+          Object.entries(data).forEach(([key, value]) => {
+            if (!value) {
+              userData[key as keyof FormData] = "";
+            } else {
+              userData[key as keyof FormData] = value as string;
+            }
+          });
+          console.log(userData);
+        }
+        setFormData(userData);
+      } else {
+        setUser(null);
+      }
     });
+
+    return () => unsubscribe();
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-    setUserProfile({
-      name: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
-      batch: formData.passOutYear,
-    });
-    setUserProfile2({
-      address: formData.address,
-      dob: formData.dob,
-      skills: formData.skills,
-    });
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+      await setDoc(userDocRef, formData, { merge: true });
+      alert("Profile updated successfully!");
+    }
   };
 
   return (

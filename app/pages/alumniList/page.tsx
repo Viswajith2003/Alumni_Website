@@ -1,11 +1,32 @@
 "use client"; // Correctly specify this as a client component
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../backend/firebase/config";
 import alumniData from "./data"; // Import the alumni data from the separate file
 
 const AlumniList = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let list = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setData(list);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
+
+  console.log(data);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);

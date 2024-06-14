@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import MainWelcomeScreen from "./screens/main_welcome_screen/page";
 import MainHomeScreen from "./screens/main_home_screen/page";
+// import { AuthContext } from "./backend/AuthContext";
 
 export default function Home() {
-
+  // const { currentUser } = useContext(AuthContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -13,5 +14,4 @@ export default function Home() {
   }, []);
 
   return <main>{isLoggedIn ? <MainHomeScreen /> : <MainWelcomeScreen />}</main>;
-
 }
