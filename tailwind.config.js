@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        home: "url(/images/bg.png)",
+        welcome: "url(/images/bg.png)",
+        home: "url(/images/gallary10.jpg)",
       },
     },
   },
