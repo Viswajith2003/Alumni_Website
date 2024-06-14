@@ -9,12 +9,8 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { userInputs } from "../../constants/formSource";
 
 export default function Register() {
-  const [file, setFile] = useState("");
-  const [data, setData] = useState({});
-  const [errors, setErrors] = useState({});
-  const [per, setPerc] = useState(null);
-
-  const initialState = {
+  const [file, setFile] = useState(null);
+  const [data, setData] = useState({
     firstname: "",
     middlename: "",
     lastname: "",
@@ -27,7 +23,11 @@ export default function Register() {
     course: "",
     batch: "",
     connectedTo: "",
-  };
+    address: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [per, setPerc] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const uploadFile = () => {
@@ -40,7 +40,6 @@ export default function Register() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
           setPerc(progress);
           switch (snapshot.state) {
             case "paused":
@@ -54,7 +53,7 @@ export default function Register() {
           }
         },
         (error) => {
-          console.log(error);
+          console.error(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -63,24 +62,40 @@ export default function Register() {
         }
       );
     };
-    file && uploadFile();
+
+    if (file) {
+      uploadFile();
+    }
   }, [file]);
 
   const handleInput = (e) => {
-    const id = e.target.id;
-    const value = e.target.value;
+    const { id, value } = e.target;
+    setData((prev) => ({ ...prev, [id]: value }));
+  };
 
-    setData({ ...data, [id]: value });
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!data.email) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!data.password) {
+      newErrors.password = "Password is required";
+    } else if (data.password !== data.repeatPassword) {
+      newErrors.repeatPassword = "Passwords do not match";
+    }
+
+    return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const errors = {};
-    if (Object.keys(errors).length > 0) {
-      setErrors(errors);
-      return;
+    const validationErrors = validateForm();
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
     } else {
-      console.log("submitting");
       try {
         const res = await createUserWithEmailAndPassword(
           auth,
@@ -94,14 +109,31 @@ export default function Register() {
         resetForm();
         router.push("/authentication/login");
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
     }
   };
-  function resetForm() {
-    setData(initialState);
+
+  const resetForm = () => {
+    setData({
+      firstname: "",
+      middlename: "",
+      lastname: "",
+      email: "",
+      phone: "",
+      password: "",
+      repeatPassword: "",
+      dateOfBirth: "",
+      gender: "",
+      course: "",
+      batch: "",
+      connectedTo: "",
+      address: "",
+    });
     setFile(null);
-  }
+    setPerc(null);
+  };
+
   return (
     <div className="bg-[#edeced] h-screen flex flex-col justify-center items-center">
       <div className="bg-white w-auto h-auto rounded-xl p-4 flex flex-col justify-center items-center">
@@ -169,8 +201,8 @@ export default function Register() {
         <button
           onClick={handleSubmit}
           disabled={per !== null && per < 100}
-          className={`mt-5 h-[50px] w-[400px] bg-${
-            per !== null && per < 100 ? "blue-200" : "blue-700"
+          className={`mt-5 h-[50px] w-[400px] ${
+            per !== null && per < 100 ? "bg-blue-200" : "bg-blue-700"
           } p-2 rounded-xl text-white font-bold mb-1`}
           style={{
             cursor: per !== null && per < 100 ? "not-allowed" : "pointer",
