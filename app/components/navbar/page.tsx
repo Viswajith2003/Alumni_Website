@@ -22,7 +22,7 @@ export default function navbar() {
         </div>
         <nav className="hidden lg:flex flex-row items-center gap-6 font-bold text-xl ">
           <Link
-            href="/hero"
+            href="/pages/hero"
             className="text-blue-800"
             data-aos="zoom-out-down"
             data-aos-duration="3000"
@@ -30,28 +30,28 @@ export default function navbar() {
             Home
           </Link>
           <Link
-            href="/about"
+            href="/pages/about"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
             About Us
           </Link>
           <Link
-            href="/servicess"
+            href="/pages/servicess"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
             Services
           </Link>
           <Link
-            href="/gallary"
+            href="/pages/gallary"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
             Gallery
           </Link>
           <Link
-            href="/contacts"
+            href="/pages/contacts"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
