@@ -20,14 +20,14 @@ export default function HomeNav() {
   const toggleJobsMenu = () => {
     setJobsMenu(!jobsMenu);
   };
-  const { dispatch } = useContext(AuthContext);
+  // const { dispatch } = useContext(AuthContext);
 
   const handleLogout = () => {
     signOut(auth);
     sessionStorage.removeItem("user");
     localStorage.clear();
     sessionStorage.clear();
-    dispatch({ type: "LOGOUT" });
+    // dispatch({ type: "LOGOUT" });
   };
 
   return (
