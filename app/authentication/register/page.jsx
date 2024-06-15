@@ -32,7 +32,9 @@ export default function Register() {
   useEffect(() => {
     const uploadFile = () => {
       const fileName = new Date().getTime() + file.name;
+      console.log(fileName);
       const storageRef = ref(storage, fileName);
+      console.log(storageRef);
       const uploadTask = uploadBytesResumable(storageRef, file);
 
       uploadTask.on(
@@ -58,6 +60,7 @@ export default function Register() {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setData((prev) => ({ ...prev, img: downloadURL }));
+            console.log("File available at", downloadURL);
           });
         }
       );
