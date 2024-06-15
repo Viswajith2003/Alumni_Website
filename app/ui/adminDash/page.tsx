@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Sidebar from "./sidebar/page";
+import Navbar from "./navbar/page";
 import DashAdmin from "./dashboard /page";
 
 export default function AdminDash() {
@@ -12,6 +13,7 @@ export default function AdminDash() {
         sidebarToggle={sidebarToggle}
         setSidebarToggle={setSidebarToggle}
       />
+      <Navbar sidebarToggle={sidebarToggle} setSidebarToggle={setSidebarToggle} />
     </div>
   );
 }

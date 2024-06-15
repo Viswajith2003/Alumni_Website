@@ -34,6 +34,3 @@ export default function Sidebar({ sidebarToggle }) {
     </div>
   );
 }
-
-
-

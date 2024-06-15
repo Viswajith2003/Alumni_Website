@@ -2,10 +2,10 @@ import React from "react";
 import Navbar from "../navbar/page";
 import data from "./data";
 
-export default function DashAdmin({ sidebarToggle, setSidebarToggle }) {
+export default function Dashboard({ sidebarToggle, setSidebarToggle }) {
   return (
     <div className={`${sidebarToggle ? "" : "ml-72"} w-full`}>
-      <Navbar sidebarToggle={sidebarToggle} setSidebarToggle={setSidebarToggle} />
+      
       <div className="bg-gray-200 h-[840px] p-5">
         <div className="flex p-8 gap-12">
           {data.map((item, index) => (
