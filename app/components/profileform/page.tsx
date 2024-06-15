@@ -1,60 +1,68 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { doc, getDoc, setDoc, DocumentData } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { DocumentData, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../backend/firebase/config";
 
 type FormData = {
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   phone: string;
+  password: string;
+  repeatPassword: string;
+  dateOfBirth: string;
+  gender: string;
+  course: string;
+  batch: string;
+  connectedTo: string;
   address: string;
-  dob: string;
-  passOutYear: string;
-  skills: string;
+  img: string;
 };
 
 export default function ProfileForm() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
+  const [singleDoc, setSingleDoc] = useState<DocumentData | null>(null);
   const [formData, setFormData] = useState<FormData>({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
     phone: "",
+    password: "",
+    repeatPassword: "",
+    dateOfBirth: "",
+    gender: "",
+    course: "",
+    batch: "",
+    connectedTo: "",
     address: "",
-    dob: "",
-    passOutYear: "",
-    skills: "",
+    img: "",
   });
 
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setUser(user);
-        const userDocRef = doc(db, "users", user.uid);
-        const userDocSnapshot = await getDoc(userDocRef);
-        console.log({ userDocSnapshot });
-        const userData: FormData = { ...formData };
-        if (userDocSnapshot.exists()) {
-          const data = userDocSnapshot.data() as FormData;
-          Object.entries(data).forEach(([key, value]) => {
-            if (!value) {
-              userData[key as keyof FormData] = "";
-            } else {
-              userData[key as keyof FormData] = value as string;
-            }
-          });
-          console.log(userData);
-        }
-        setFormData(userData);
-      } else {
-        setUser(null);
-      }
-    });
+    const userFromStorage = JSON.parse(localStorage.getItem("user") || "null");
+    setUser(userFromStorage);
+    console.log(userFromStorage.uid);
 
-    return () => unsubscribe();
+    if (userFromStorage) {
+      const fetchUserData = async () => {
+        try {
+          const userDocRef = doc(db, "users", userFromStorage.uid);
+          const userDoc = await getDoc(userDocRef);
+
+          if (userDoc.exists()) {
+            setSingleDoc(userDoc.data());
+            setFormData(userDoc.data() as FormData);
+          } else {
+            // userDoc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      };
+
+      fetchUserData();
+    }
   }, []);
 
   const handleChange = (
@@ -69,9 +77,16 @@ export default function ProfileForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (user) {
-      const userDocRef = doc(db, "users", user.uid);
-      await setDoc(userDocRef, formData, { merge: true });
-      alert("Profile updated successfully!");
+      try {
+        const userDocRef = doc(db, "users", user.uid);
+        await setDoc(userDocRef, formData, { merge: true });
+        alert("Profile updated successfully!");
+      } catch (e) {
+        console.error(e);
+        alert("Failed to update profile. Please try again.");
+      }
+    } else {
+      alert("No user is logged in.");
     }
   };
 
@@ -87,29 +102,29 @@ export default function ProfileForm() {
       {/* First and Last Name */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black">
         <div>
-          <label className="block text-gray-700 mb-2" htmlFor="firstName">
+          <label className="block text-gray-700 mb-2" htmlFor="firstname">
             First Name
           </label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
+            id="firstname"
+            name="firstname"
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={formData.firstName}
+            value={formData.firstname}
             onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label className="block text-gray-700 mb-2" htmlFor="lastName">
+          <label className="block text-gray-700 mb-2" htmlFor="lastname">
             Last Name
           </label>
           <input
             type="text"
-            id="lastName"
-            name="lastName"
+            id="lastname"
+            name="lastname"
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={formData.lastName}
+            value={formData.lastname}
             onChange={handleChange}
             required
           />
@@ -165,15 +180,15 @@ export default function ProfileForm() {
 
       {/* Date of Birth */}
       <div className="mt-4 text-black">
-        <label className="block text-gray-700 mb-2" htmlFor="dob">
+        <label className="block text-gray-700 mb-2" htmlFor="dateOfBirth">
           Date of Birth
         </label>
         <input
           type="date"
-          id="dob"
-          name="dob"
+          id="dateOfBirth"
+          name="dateOfBirth"
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={formData.dob}
+          value={formData.dateOfBirth}
           onChange={handleChange}
           required
         />
@@ -181,15 +196,15 @@ export default function ProfileForm() {
 
       {/* Pass-Out Year */}
       <div className="mt-4 text-black">
-        <label className="block text-gray-700 mb-2" htmlFor="passOutYear">
+        <label className="block text-gray-700 mb-2" htmlFor="batch">
           Pass-Out Year
         </label>
         <input
           type="number"
-          id="passOutYear"
-          name="passOutYear"
+          id="batch"
+          name="batch"
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={formData.passOutYear}
+          value={formData.batch}
           onChange={handleChange}
           required
         />
@@ -197,14 +212,14 @@ export default function ProfileForm() {
 
       {/* Skills */}
       <div className="mt-4 text-black">
-        <label className="block text-gray-700 mb-2" htmlFor="skills">
+        <label className="block text-gray-700 mb-2" htmlFor="connectedTo">
           Skills
         </label>
         <textarea
-          id="skills"
-          name="skills"
+          id="connectedTo"
+          name="connectedTo"
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={formData.skills}
+          value={formData.connectedTo}
           onChange={handleChange}
           rows={3}
         />

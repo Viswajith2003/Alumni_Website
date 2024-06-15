@@ -10,7 +10,8 @@ export default function Home() {
 
   useEffect(() => {
     const user = sessionStorage.getItem("user");
-    setIsLoggedIn(user === "true");
+    const user1 = localStorage.getItem("user");
+    setIsLoggedIn(user === "true" || user1 === "true");
   }, []);
 
   return <main>{isLoggedIn ? <MainHomeScreen /> : <MainWelcomeScreen />}</main>;

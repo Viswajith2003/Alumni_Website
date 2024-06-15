@@ -9,10 +9,8 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { userInputs } from "../../constants/formSource";
 
 export default function Register() {
-  const [file, setFile] = useState(null);
   const [data, setData] = useState({
     firstname: "",
-    middlename: "",
     lastname: "",
     email: "",
     phone: "",
@@ -26,8 +24,10 @@ export default function Register() {
     address: "",
   });
   const [errors, setErrors] = useState({});
-  const [per, setPerc] = useState(null);
   const router = useRouter();
+
+  const [file, setFile] = useState(null);
+  const [per, setPerc] = useState(null);
 
   useEffect(() => {
     const uploadFile = () => {
@@ -117,7 +117,6 @@ export default function Register() {
   const resetForm = () => {
     setData({
       firstname: "",
-      middlename: "",
       lastname: "",
       email: "",
       phone: "",
