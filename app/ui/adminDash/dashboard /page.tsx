@@ -4,13 +4,14 @@ import data from "./data";
 
 export default function Dashboard({ sidebarToggle, setSidebarToggle }) {
   return (
-    <div className={`${sidebarToggle ? "" : "ml-72"} w-full`}>
-      
+    <div className={`${sidebarToggle} p-1`}>
       <div className="bg-gray-200 h-[840px] p-5">
         <div className="flex p-8 gap-12">
           {data.map((item, index) => (
             <div key={index} className="flex space-x-5 bg-white p-4 rounded-lg">
-              <div className={`model rounded-full w-20 h-20 mt-2 flex items-center justify-center ${item.color}`}>
+              <div
+                className={`model rounded-full w-20 h-20 mt-2 flex items-center justify-center ${item.color}`}
+              >
                 <item.icon className="text-white w-10 h-10" />
               </div>
               <div className="mt-4 space-y-1">
@@ -24,4 +25,3 @@ export default function Dashboard({ sidebarToggle, setSidebarToggle }) {
     </div>
   );
 }
-

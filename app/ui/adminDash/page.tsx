@@ -5,16 +5,25 @@ import Navbar from "./navbar/page";
 import DashAdmin from "./dashboard /page";
 
 export default function AdminDash() {
-  const [sidebarToggle, setSidebarToggle] = useState(false); // ensure this is defined
+  const [sidebarToggle, setSidebarToggle] = useState(false);
+
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <Sidebar sidebarToggle={sidebarToggle} />
-      <DashAdmin
-        sidebarToggle={sidebarToggle}
-        setSidebarToggle={setSidebarToggle}
-      />
-      <Navbar sidebarToggle={sidebarToggle} setSidebarToggle={setSidebarToggle} />
+      <div
+        className={`flex flex-col w-full ${sidebarToggle ? "" : "ml-72"}`}
+      >
+        <Navbar
+          sidebarToggle={sidebarToggle}
+          setSidebarToggle={setSidebarToggle}
+        />
+        <main className="flex-grow p-3 pr-4">
+          <DashAdmin
+            sidebarToggle={sidebarToggle}
+            setSidebarToggle={setSidebarToggle}
+          />
+        </main>
+      </div>
     </div>
   );
 }
-
