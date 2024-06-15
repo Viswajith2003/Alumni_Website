@@ -8,16 +8,18 @@ export default function AdminDash() {
   const [sidebarToggle, setSidebarToggle] = useState(false);
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       <Sidebar sidebarToggle={sidebarToggle} />
       <div
-        className={`flex flex-col w-full ${sidebarToggle ? "" : "ml-72"}`}
+        className={`flex flex-col flex-grow w-full ${
+          sidebarToggle ? "" : "ml-72"
+        }`}
       >
         <Navbar
           sidebarToggle={sidebarToggle}
           setSidebarToggle={setSidebarToggle}
         />
-        <main className="flex-grow p-3 pr-4">
+        <main className="flex-grow overflow-auto p-3 pr-4">
           <DashAdmin
             sidebarToggle={sidebarToggle}
             setSidebarToggle={setSidebarToggle}
