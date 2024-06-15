@@ -4,7 +4,7 @@ import data from "./data";
 
 export default function Dashboard({ sidebarToggle, setSidebarToggle }) {
   return (
-    <div className={`${sidebarToggle} p-1`}>
+    <div className={`${sidebarToggle} bg-gray-200 h-full p-5 overflow-hidden`}>
       <div className="bg-gray-200 h-[840px] p-5">
         <div className="flex p-8 gap-12">
           {data.map((item, index) => (
