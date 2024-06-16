@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { FaBars, FaBell, FaSearch, FaUserCircle } from "react-icons/fa";
 
@@ -28,16 +29,22 @@ export default function Navbar({ sidebarToggle, setSidebarToggle }) {
         <div className="relative">
           <button className="group">
             <FaUserCircle className="w-6 h-6 mt-1" />
-            <div className="z-10 hidden absolute rounded-lg shadow w-32 group-focus:block top-full right-0">
-              <ul className="py-2 text-sm text-gray-950">
-                <li>
-                  <a href="">Profile</a>
+            <div className="z-10 hidden absolute bg-white rounded-lg shadow w-32 group-focus:block top-full right-0">
+              <ul className="py-4 text-md text-black grid grid-rows-3 gap-2">
+                <li className="hover:bg-blue-500 hover:text-white w-24 mx-auto rounded-md">
+                  <Link href="/profile">
+                    <p>Profile</p>
+                  </Link>
                 </li>
-                <li>
-                  <a href="">Setting</a>
+                <li className="hover:bg-blue-500 hover:text-white w-24 mx-auto rounded-md">
+                  <Link href="/settings">
+                    <p>Setting</p>
+                  </Link>
                 </li>
-                <li>
-                  <a href="">Log Out</a>
+                <li className="hover:bg-blue-500 hover:text-white w-24 mx-auto rounded-md">
+                  <Link href="/ui/welcome">
+                    <p onClick={() => localStorage.clear()}>Logout</p>
+                  </Link>
                 </li>
               </ul>
             </div>

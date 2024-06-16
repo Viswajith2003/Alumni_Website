@@ -1,5 +1,5 @@
 import React from "react";
-import Admin from "../../pages/admin/page";
+import Admin from "../../ui/adminDash/page";
 
 const MainAdminScreen = () => {
   return (

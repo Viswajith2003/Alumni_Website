@@ -24,7 +24,7 @@ export default function HomeNav() {
 
   const handleLogout = () => {
     signOut(auth);
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("user");
     localStorage.clear();
     sessionStorage.clear();
     // dispatch({ type: "LOGOUT" });
