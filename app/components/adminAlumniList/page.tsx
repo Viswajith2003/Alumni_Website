@@ -1,15 +1,37 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import data from "./data"; // Adjust the import path as necessary
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { db } from "../../backend/firebase/config"; // Adjust the import path as necessary
 
 const AlumniList = () => {
   // Define state variables for alumni list
   const [alumniList, setAlumniList] = useState([]);
   const [selectedAlumni, setSelectedAlumni] = useState(null);
 
-  // Fetch alumni data from data.js
+  // Fetch alumni data from Firestore
   useEffect(() => {
-    setAlumniList(data);
+    const fetchData = async () => {
+      let list = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          list.push({
+            id: doc.id,
+            avatar: data.img || "https://via.placeholder.com/50",
+            name: `${data.firstname} ${data.lastname}`,
+            passoutYear: data.batch,
+            email: data.email,
+            gender: data.gender,
+            verified: data.verified || false,
+          });
+        });
+        setAlumniList(list);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
   }, []);
 
   // Function to handle view action
@@ -23,13 +45,21 @@ const AlumniList = () => {
   };
 
   // Function to handle verify action
-  const handleVerify = () => {
+  const handleVerify = async () => {
     if (selectedAlumni) {
-      const updatedAlumniList = alumniList.map((alumni) =>
-        alumni.id === selectedAlumni.id ? { ...alumni, verified: true } : alumni
-      );
-      setAlumniList(updatedAlumniList);
-      setSelectedAlumni(null);
+      const selectedAlumniDocRef = doc(db, "users", selectedAlumni.id);
+      try {
+        await setDoc(selectedAlumniDocRef, { verified: true }, { merge: true });
+        const updatedAlumniList = alumniList.map((alumni) =>
+          alumni.id === selectedAlumni.id
+            ? { ...alumni, verified: true }
+            : alumni
+        );
+        setAlumniList(updatedAlumniList);
+        setSelectedAlumni(null);
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -79,7 +109,7 @@ const AlumniList = () => {
                 {alumni.passoutYear}
               </td>
               <td className="px-6 py-4 border-b border-gray-300">
-                {alumni.verified ? "Verified"  : "Not Verified"}
+                {alumni.verified ? "Verified" : "Not Verified"}
               </td>
               <td className="px-6 py-4 border-b border-gray-300">
                 <button
