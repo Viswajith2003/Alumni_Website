@@ -157,8 +157,13 @@ function Profile() {
   };
 
   return (
-    <div className="flex container mx-auto p-5 space-x-14 text-white flex-col md:flex-row">
-      <div className="bg-gray-600 md:h-[895px] h-[560px] ml-14 rounded-xl my-3">
+    <div className="flex container mx-auto p-3 space-x-14 text-white flex-col md:flex-row">
+      {/* 
+
+        profile Icon Component 
+
+      */}
+      <div className="bg-gray-600 max-h-[720px] overflow-y-hidded sm:h-auto ml-14 rounded-xl my-3">
         <div className="flex flex-col justify-center items-center text-center p-2 text-white">
           <input
             type="file"
@@ -195,26 +200,28 @@ function Profile() {
               )}
             </div>
 
-            <h1 className="mt-5 text-4xl font-bold mb-3">
-              {formData.firstname + " " + formData.lastname}
+            <h1 className="mt-5 text-4xl font-bold mb-3 ">
+              {formData.firstname.toUpperCase() +
+                " " +
+                formData.lastname.toUpperCase()}
             </h1>
             <p className="text-xl">
               Hi, I am student of Govt.Engineering College <br />
               Sreekrishnapuram, Palakkad
             </p>
-            <div className="mt-5">
+            <div className="mt-10">
               <div className="flex flex-row justify-center items-center gap-3 ">
                 <button
-                  className="p-2 bg-blue-600 text-white rounded-lg hover:scale-95"
+                  className="p-2 bg-blue-600  text-white rounded-lg hover:scale-95"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   Update Profile Image
                 </button>
 
-                <button className="p-2 bg-blue-600 text-white rounded-lg hover:scale-95">
+                <button className="p-2 bg-blue-600  text-white rounded-lg hover:scale-95">
                   Change Password
                 </button>
-                <button className="p-2 bg-blue-600 text-white rounded-lg hover:scale-95">
+                <button className="p-2 bg-blue-600  text-white rounded-lg hover:scale-95">
                   Delete Account
                 </button>
               </div>
@@ -222,9 +229,14 @@ function Profile() {
           </div>
         </div>
       </div>
+      {/* 
+
+        profile Form Component 
+
+      */}
       <div className="">
         <form
-          className="max-w-3xl mx-auto p-6 bg-[#c0c2c8] shadow-md my-3 rounded-lg h-[560px] overflow-y-auto md:overflow-y-hidden md:h-[895px]"
+          className="w-[800px] mx-auto p-6 bg-[#c0c2c8] shadow-md my-3 rounded-lg overflow-y-hidded max-h-[720px] sm:h-auto"
           onSubmit={handleSubmit}
         >
           <h2 className="text-3xl font-semibold mb-6 text-gray-800 text-center">
@@ -262,39 +274,39 @@ function Profile() {
               />
             </div>
           </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black">
+            {/* Email */}
+            <div className="mt-4 text-black">
+              <label className="block text-gray-700 mb-2" htmlFor="email">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          {/* Email */}
-          <div className="mt-4 text-black">
-            <label className="block text-gray-700 mb-2" htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
+            {/* Phone */}
+            <div className="mt-4 text-black">
+              <label className="block text-gray-700 mb-2" htmlFor="phone">
+                Phone
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
-
-          {/* Phone */}
-          <div className="mt-4 text-black">
-            <label className="block text-gray-700 mb-2" htmlFor="phone">
-              Phone
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
           {/* Address */}
           <div className="mt-4 text-black">
             <label className="block text-gray-700 mb-2" htmlFor="address">
@@ -309,39 +321,39 @@ function Profile() {
               rows={3}
             />
           </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black">
+            {/* Date of Birth */}
+            <div className="mt-4 text-black">
+              <label className="block text-gray-700 mb-2" htmlFor="dateOfBirth">
+                Date of Birth
+              </label>
+              <input
+                type="date"
+                id="dateOfBirth"
+                name="dateOfBirth"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={formData.dateOfBirth}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          {/* Date of Birth */}
-          <div className="mt-4 text-black">
-            <label className="block text-gray-700 mb-2" htmlFor="dateOfBirth">
-              Date of Birth
-            </label>
-            <input
-              type="date"
-              id="dateOfBirth"
-              name="dateOfBirth"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={formData.dateOfBirth}
-              onChange={handleChange}
-              required
-            />
+            {/* Pass-Out Year */}
+            <div className="mt-4 text-black">
+              <label className="block text-gray-700 mb-2" htmlFor="batch">
+                Pass-Out Year
+              </label>
+              <input
+                type="number"
+                id="batch"
+                name="batch"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={formData.batch}
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
-
-          {/* Pass-Out Year */}
-          <div className="mt-4 text-black">
-            <label className="block text-gray-700 mb-2" htmlFor="batch">
-              Pass-Out Year
-            </label>
-            <input
-              type="number"
-              id="batch"
-              name="batch"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={formData.batch}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
           {/* Skills */}
           <div className="mt-4 text-black">
             <label className="block text-gray-700 mb-2" htmlFor="connectedTo">

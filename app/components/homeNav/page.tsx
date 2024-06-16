@@ -50,14 +50,14 @@ export default function HomeNav() {
             Home
           </Link>
           <Link
-            href="/pages/alumniList"
+            href="/ui/alumniList"
             className=" hover:text-blue-600 hover:scale-95"
             data-aos="zoom-out-down"
           >
             Alumni
           </Link>
           <Link
-            href="/pages/eventList"
+            href="/ui/eventList"
             className=" hover:text-blue-600 hover:scale-95"
             data-aos="zoom-out-down"
           >
@@ -76,13 +76,13 @@ export default function HomeNav() {
             {jobsMenu && ( // Display the dropdown menu if jobsMenu is true
               <div className="absolute top-full left-8 bg-gray-100 shadow-lg p-2 rounded w-40">
                 <Link
-                  href="/pages/viewJob"
+                  href="/ui/viewJob"
                   className="block px-4 py-2 text-black hover:text-blue-600 hover:scale-95"
                 >
                   View-Jobs
                 </Link>
                 <Link
-                  href="/pages/postJob"
+                  href="/ui/postJob"
                   className="block px-4 py-2 text-black hover:text-blue-600 hover:scale-95"
                 >
                   Post-Jobs
@@ -91,14 +91,14 @@ export default function HomeNav() {
             )}
           </div>
           <Link
-            href="/pages/gallery"
+            href="/ui/gallery"
             className=" hover:text-blue-600 hover:scale-95"
             data-aos="zoom-out-down"
           >
             Gallery
           </Link>
           <Link
-            href="/pages/profile"
+            href="/ui/profile"
             className=" hover:text-blue-600 hover:scale-95"
             data-aos="zoom-out-down"
           >
@@ -167,13 +167,13 @@ export default function HomeNav() {
           {jobsMenu && (
             <div className="absolute bg-white text-black shadow-lg w-40">
               <Link
-                href="/pages/viewJob"
+                href="/ui/viewJob"
                 className="block px-4 py-2 hover:bg-gray-100 hover:scale-95"
               >
                 View-Jobs
               </Link>
               <Link
-                href="/pages/postJob"
+                href="/ui/postJob"
                 className="block px-4 py-2 hover:bg-gray-100 hover:scale-95"
               >
                 Post-Jobs

@@ -143,44 +143,50 @@ export default function Register() {
           <h1 className="font-bold text-3xl mt-5 text-blue-700">REGISTER</h1>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-7">
             {userInputs.map((input) => (
-              <div key={input.id} className="block w-full h-full">
+              <div key={input.id} className="w-full block h-full">
                 {input.type === "select" ? (
-                  <select
-                    id={input.id}
-                    value={data[input.id]}
-                    onChange={handleInput}
-                    className="border-2 border-black p-3 rounded-xl w-full"
-                  >
-                    {input.options.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
+                  <div>
+                    <select
+                      id={input.id}
+                      value={data[input.id]}
+                      onChange={handleInput}
+                      className="border-2 border-black p-[14px] rounded-xl w-full bg-white"
+                    >
+                      {input.options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 ) : input.type === "textarea" ? (
-                  <textarea
-                    id={input.id}
-                    placeholder={input.placeholder}
-                    value={data[input.id]}
-                    onChange={handleInput}
-                    className="border-2 border-black p-3 rounded-xl w-full h-[150px]"
-                  />
+                  <div className="block w-full h-full">
+                    <textarea
+                      id={input.id}
+                      placeholder={input.placeholder}
+                      value={data[input.id]}
+                      onChange={handleInput}
+                      className="border-2 border-black p-3 rounded-xl w-full"
+                    />
+                  </div>
                 ) : (
-                  <input
-                    id={input.id}
-                    type={input.type}
-                    placeholder={input.placeholder}
-                    value={data[input.id]}
-                    onChange={handleInput}
-                    className="border-2 border-black p-3 rounded-xl w-full"
-                  />
+                  <div>
+                    <input
+                      id={input.id}
+                      type={input.type}
+                      placeholder={input.placeholder}
+                      value={data[input.id]}
+                      onChange={handleInput}
+                      className="border-2 border-black p-3 rounded-xl w-full"
+                    />
+                  </div>
                 )}
                 {errors[input.id] && (
                   <p className="text-red-600 text-left">{errors[input.id]}</p>
                 )}
               </div>
             ))}
-            <div className="block w-full h-full">
+            <div className="block w-full h-full col-span-2">
               <input
                 type="file"
                 id="file"
@@ -190,10 +196,12 @@ export default function Register() {
               {errors.file && (
                 <p className="text-red-600 text-left">{errors.file}</p>
               )}
+            </div>
+            <div className="block w-full h-full">
               {file && (
                 <img
                   src={URL.createObjectURL(file)}
-                  className="w-[90px] h-[90px] mx-3"
+                  className="w-[100px] h-[100px] mx-3"
                   alt="User Upload"
                 />
               )}
