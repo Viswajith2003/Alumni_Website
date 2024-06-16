@@ -1,38 +1,48 @@
-"use client"; // Correctly specify this as a client component
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../backend/firebase/config";
-import alumniData from "./data"; // Import the alumni data from the separate file
 
 const AlumniList = () => {
+  const [alumniList, setAlumniList] = useState([]);
+  const [selectedAlumni, setSelectedAlumni] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState([]);
+
+  const fetchData = async () => {
+    let list = [];
+    try {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        list.push({
+          id: doc.id,
+          avatar: data.img || "https://via.placeholder.com/50",
+          name: `${data.firstname} ${data.lastname}`,
+          passoutYear: data.batch,
+          verified: data.verified || false,
+        });
+      });
+      setAlumniList(list);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      let list = [];
-      try {
-        const querySnapshot = await getDocs(collection(db, "users"));
-        querySnapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        setData(list);
-      } catch (e) {
-        console.log(e);
-      }
-    };
     fetchData();
   }, []);
 
-  console.log(data);
+  const handleViewAlumni = (index) => {
+    setSelectedAlumni(alumniList[index]);
+  };
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredAlumni = alumniData.filter((alumnus) =>
+  const filteredAlumni = alumniList.filter((alumnus) =>
     alumnus.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -67,7 +77,7 @@ const AlumniList = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-        {filteredAlumni.map((alumnus) => (
+        {filteredAlumni.map((alumnus, index) => (
           <div key={alumnus.id} className="bg-white p-4 rounded-lg shadow-md">
             <div className="flex items-center space-x-4">
               <img
