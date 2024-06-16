@@ -9,10 +9,8 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { userInputs } from "../../constants/formSource";
 
 export default function Register() {
-  const [file, setFile] = useState(null);
   const [data, setData] = useState({
     firstname: "",
-    middlename: "",
     lastname: "",
     email: "",
     phone: "",
@@ -26,13 +24,17 @@ export default function Register() {
     address: "",
   });
   const [errors, setErrors] = useState({});
-  const [per, setPerc] = useState(null);
   const router = useRouter();
+
+  const [file, setFile] = useState(null);
+  const [per, setPerc] = useState(null);
 
   useEffect(() => {
     const uploadFile = () => {
       const fileName = new Date().getTime() + file.name;
+      console.log(fileName);
       const storageRef = ref(storage, fileName);
+      console.log(storageRef);
       const uploadTask = uploadBytesResumable(storageRef, file);
 
       uploadTask.on(
@@ -58,6 +60,7 @@ export default function Register() {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setData((prev) => ({ ...prev, img: downloadURL }));
+            console.log("File available at", downloadURL);
           });
         }
       );
@@ -117,7 +120,6 @@ export default function Register() {
   const resetForm = () => {
     setData({
       firstname: "",
-      middlename: "",
       lastname: "",
       email: "",
       phone: "",
