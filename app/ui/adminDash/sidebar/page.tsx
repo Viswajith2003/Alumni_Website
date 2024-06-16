@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Data from "./data";
+import { IoLogOutOutline } from "react-icons/io5";
 
 export default function Sidebar({ sidebarToggle }) {
   return (
@@ -29,6 +30,17 @@ export default function Sidebar({ sidebarToggle }) {
             </Link>
           </li>
         ))}
+        <li className="mb-2 rounded hover:shadow hover:bg-blue-500 py-2">
+          <Link href="/ui/welcome" className="px-3 flex items-center gap-2">
+            <IoLogOutOutline className="w-6 h-6" />
+            <h2
+              onClick={() => localStorage.clear()}
+              className="text-xl font-semibold"
+            >
+              LogOut
+            </h2>
+          </Link>
+        </li>
       </ul>
     </div>
   );

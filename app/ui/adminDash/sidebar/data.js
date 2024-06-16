@@ -49,11 +49,6 @@ const data = [
     icon: MdOutgoingMail,
     path: "/send-mail",
   },
-  {
-    name: "LogOut",
-    icon: IoLogOutOutline,
-    path: "/ui/welcome",
-  },
 ];
 
 export default data;

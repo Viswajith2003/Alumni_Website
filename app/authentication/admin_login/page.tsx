@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../backend/firebase/config";
 import { useRouter } from "next/navigation";
@@ -18,27 +18,40 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
+  const [user, setUser] = useState(null);
 
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
 
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("admin", JSON.stringify(user));
+      setEmail("");
+      setPassword("");
+      router.push("/screens/main_admin_screen");
+    }
+  }, [user]);
   const handleSignIn = async () => {
-    try {
-      const res = await signInWithEmailAndPassword(email, password);
-      if (res.user) {
-        sessionStorage.setItem("user", "true");
-        setEmail("");
-        setPassword("");
-        router.push("/screens/main_admin_screen");
-      } else {
-        console.error("User is not signed in");
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          general: "Something went wrong",
-        }));
+    if (email.slice(-6) === ".admin") {
+      const value = email.slice(0, -6);
+      try {
+        const res = await signInWithEmailAndPassword(value, password);
+        if (res.user) {
+          console.log(res.user);
+          setUser(res.user);
+          setEmail("");
+          setPassword("");
+        } else {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            general: "Something went wrong",
+          }));
+        }
+      } catch (e) {
+        setErrors((prevErrors) => ({ ...prevErrors, general: e.message }));
       }
-    } catch (e) {
-      setErrors((prevErrors) => ({ ...prevErrors, general: e.message }));
+    } else {
+      setErrors((prevErrors) => ({ ...prevErrors, general: "Unknown Admin....!" }));
     }
   };
 
