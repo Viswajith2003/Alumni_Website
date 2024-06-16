@@ -28,7 +28,7 @@ const Welcome = () => {
       <Navbar />
 
       <div className="relative h-screen overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-cover bg-home z-0"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-cover bg-welcome z-0"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full gap-4">
           <div data-aos="fade-right">
             <h1 className="text-center text-white text-2xl mb-8 font-mono">

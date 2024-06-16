@@ -31,7 +31,7 @@ const HomePage = () => {
         <div className="absolute top-0 left-0 w-full h-full bg-cover bg-home z-0"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full gap-4">
           <div data-aos="fade-left">
-            <h1 className="text-center text-white text-5xl font-bold">
+            <h1 className="text-center text-black text-5xl font-bold">
               <span className="typing-element"></span>
             </h1>
           </div>

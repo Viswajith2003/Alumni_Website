@@ -12,12 +12,12 @@ const data = [
   {
     name: "Dashboard",
     icon: AiOutlineDashboard,
-    path: "/dashboard",
+    path: "/ui/adminDash/dashboard",
   },
   {
     name: "Alumni List",
     icon: HiUser,
-    path: "/alumni-list",
+    path: "/components/adminAlumniList",
   },
   {
     name: "Gallery",
@@ -27,12 +27,12 @@ const data = [
   {
     name: "Add Event",
     icon: PiNotepad,
-    path: "/add-event",
+    path: "/components/adminEvents",
   },
   {
     name: "Jobs",
     icon: FaUserGraduate,
-    path: "/jobs",
+    path: "/components/adminJobs",
   },
   {
     name: "Feedback",
@@ -52,10 +52,8 @@ const data = [
   {
     name: "LogOut",
     icon: IoLogOutOutline,
-    path: "/logout",
+    path: "/ui/welcome",
   },
 ];
 
 export default data;
-
-
