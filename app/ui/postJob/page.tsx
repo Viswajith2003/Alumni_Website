@@ -1,46 +1,54 @@
 "use client";
 import React, { useState } from "react";
+import { getDatabase, ref, set } from "firebase/database";
+import { v4 as uuidv4 } from "uuid";
 
 const PostJob = () => {
-  // Define state variables for form fields
-  const [companyName, setCompanyName] = useState("");
-  const [jobRole, setJobRole] = useState("");
-  const [experience, setExperience] = useState("");
-  const [location, setLocation] = useState("");
-  const [requiredSkills, setRequiredSkills] = useState("");
-  const [aboutJob, setAboutJob] = useState("");
-  const [contactDetails, setContactDetails] = useState("");
-  const [applyLink, setApplyLink] = useState("");
+  const [jobDetails, setJobDetails] = useState({
+    companyName: "",
+    aboutJob: "",
+    jobRole: "",
+    location: "",
+    requiredSkill: "",
+    courseSpecialization: "",
+    salary: "",
+    experience: "",
+    contactInfo: "",
+    companyWebsite: "",
+    applyLink: "",
+  });
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const jobDetails = {
-      companyName,
-      jobRole,
-      experience,
-      location,
-      requiredSkills,
-      aboutJob,
-      contactDetails,
-      applyLink,
-    };
-
-    // Handle form submission logic (e.g., send data to API or server)
-    console.log("Job Details:", jobDetails);
-
-    // Clear form fields after submission
-    setCompanyName("");
-    setJobRole("");
-    setExperience("");
-    setLocation("");
-    setRequiredSkills("");
-    setAboutJob("");
-    setContactDetails("");
-    setApplyLink("");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setJobDetails({ ...jobDetails, [name]: value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const db = getDatabase();
+    const jobId = uuidv4(); // Generate a unique ID for each job
+    set(ref(db, "jobs/" + jobId), jobDetails)
+      .then(() => {
+        console.log("Job details added successfully");
+      })
+      .catch((error) => {
+        console.error("Error adding job details: ", error);
+      });
+
+    setJobDetails({
+      companyName: "",
+      aboutJob: "",
+      jobRole: "",
+      location: "",
+      requiredSkill: "",
+      courseSpecialization: "",
+      salary: "",
+      experience: "",
+      contactInfo: "",
+      companyWebsite: "",
+      applyLink: "",
+    });
+  };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
       <h2 className="text-4xl font-semibold mb-10 text-blue-500">
@@ -51,7 +59,6 @@ const PostJob = () => {
         className="w-full max-w-4xl bg-white p-8 rounded shadow"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Left side of the div */}
           <div>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
@@ -59,8 +66,22 @@ const PostJob = () => {
               </label>
               <input
                 type="text"
-                value={companyName}
-                onChange={(e) => setCompanyName(e.target.value)}
+                name="companyName"
+                value={jobDetails.companyName}
+                onChange={handleChange}
+                className="mt-1 p-2 border rounded w-full"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Company Website
+              </label>
+              <input
+                type="url"
+                name="companyWebsite"
+                value={jobDetails.companyWebsite}
+                onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
                 required
               />
@@ -71,8 +92,9 @@ const PostJob = () => {
               </label>
               <input
                 type="text"
-                value={jobRole}
-                onChange={(e) => setJobRole(e.target.value)}
+                name="jobRole"
+                value={jobDetails.jobRole}
+                onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
                 required
               />
@@ -83,8 +105,9 @@ const PostJob = () => {
               </label>
               <input
                 type="text"
-                value={experience}
-                onChange={(e) => setExperience(e.target.value)}
+                name="experience"
+                value={jobDetails.experience}
+                onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
                 required
               />
@@ -95,15 +118,27 @@ const PostJob = () => {
               </label>
               <input
                 type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                name="location"
+                value={jobDetails.location}
+                onChange={handleChange}
+                className="mt-1 p-2 border rounded w-full"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Salary Package
+              </label>
+              <input
+                type="text"
+                name="salary"
+                value={jobDetails.salary}
+                onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
                 required
               />
             </div>
           </div>
-
-          {/* Right side of the div */}
           <div>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
@@ -111,8 +146,22 @@ const PostJob = () => {
               </label>
               <input
                 type="text"
-                value={requiredSkills}
-                onChange={(e) => setRequiredSkills(e.target.value)}
+                name="requiredSkill"
+                value={jobDetails.requiredSkill}
+                onChange={handleChange}
+                className="mt-1 p-2 border rounded w-full"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Course Specialization
+              </label>
+              <input
+                type="text"
+                name="courseSpecialization"
+                value={jobDetails.courseSpecialization}
+                onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
                 required
               />
@@ -122,9 +171,10 @@ const PostJob = () => {
                 About this Job
               </label>
               <textarea
-                value={aboutJob}
-                onChange={(e) => setAboutJob(e.target.value)}
-                className="mt-1 p-2 border rounded w-full"
+                name="aboutJob"
+                value={jobDetails.aboutJob}
+                onChange={handleChange}
+                className="mt-1 p-2 border rounded w-full h-[120px]"
                 required
               />
             </div>
@@ -134,8 +184,9 @@ const PostJob = () => {
               </label>
               <input
                 type="text"
-                value={contactDetails}
-                onChange={(e) => setContactDetails(e.target.value)}
+                name="contactInfo"
+                value={jobDetails.contactInfo}
+                onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
                 required
               />
@@ -145,9 +196,10 @@ const PostJob = () => {
                 Apply Link
               </label>
               <input
-                type="text"
-                value={applyLink}
-                onChange={(e) => setApplyLink(e.target.value)}
+                type="url"
+                name="applyLink"
+                value={jobDetails.applyLink}
+                onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
                 required
               />
@@ -159,9 +211,9 @@ const PostJob = () => {
         <div className="flex justify-center mt-6">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-white border-blue-500 hover:text-blue-500 hover:border hover:rounded-md"
           >
-            <h1 className="text-xl font-bold w-20">Post</h1>
+            <h1 className="text-xl font-bold w-28">POST JOB</h1>
           </button>
         </div>
       </form>
