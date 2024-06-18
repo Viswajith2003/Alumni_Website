@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { getDatabase, ref, set } from "firebase/database";
 import { v4 as uuidv4 } from "uuid";
 
@@ -17,6 +17,14 @@ const PostJob = () => {
     companyWebsite: "",
     applyLink: "",
   });
+  const [currentUserUID, setCurrentUserUID] = useState(null);
+
+  useEffect(() => {
+    const userFromStorage = JSON.parse(localStorage.getItem("user") || "null");
+    if (userFromStorage) {
+      setCurrentUserUID(userFromStorage.uid);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,29 +33,31 @@ const PostJob = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const db = getDatabase();
-    const jobId = uuidv4(); // Generate a unique ID for each job
-    set(ref(db, "jobs/" + jobId), jobDetails)
-      .then(() => {
-        console.log("Job details added successfully");
-      })
-      .catch((error) => {
-        console.error("Error adding job details: ", error);
-      });
+    if (currentUserUID) {
+      const db = getDatabase();
+      const jobId = uuidv4(); // Generate a unique ID for each job
+      set(ref(db, `jobs/${currentUserUID}/${jobId}`), jobDetails)
+        .then(() => {
+          console.log("Job details added successfully");
+        })
+        .catch((error) => {
+          console.error("Error adding job details: ", error);
+        });
 
-    setJobDetails({
-      companyName: "",
-      aboutJob: "",
-      jobRole: "",
-      location: "",
-      requiredSkill: "",
-      courseSpecialization: "",
-      salary: "",
-      experience: "",
-      contactInfo: "",
-      companyWebsite: "",
-      applyLink: "",
-    });
+      setJobDetails({
+        companyName: "",
+        aboutJob: "",
+        jobRole: "",
+        location: "",
+        requiredSkill: "",
+        courseSpecialization: "",
+        salary: "",
+        experience: "",
+        contactInfo: "",
+        companyWebsite: "",
+        applyLink: "",
+      });
+    }
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
