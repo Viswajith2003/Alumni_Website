@@ -22,7 +22,7 @@ export default function navbar() {
         </div>
         <nav className="hidden lg:flex flex-row items-center gap-6 font-bold text-xl ">
           <Link
-            href="/pages/hero"
+            href="/"
             className="text-blue-800"
             data-aos="zoom-out-down"
             data-aos-duration="3000"
@@ -30,28 +30,28 @@ export default function navbar() {
             Home
           </Link>
           <Link
-            href="/pages/about"
+            href="/ui/about"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
             About Us
           </Link>
           <Link
-            href="/pages/servicess"
+            href="/ui/servicess"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
             Services
           </Link>
           <Link
-            href="/pages/gallary"
+            href="/ui/gallery"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
             Gallery
           </Link>
           <Link
-            href="/pages/contacts"
+            href="/ui/contacts"
             className=" hover:text-blue-800"
             data-aos="zoom-out-down"
           >
@@ -88,20 +88,20 @@ export default function navbar() {
           menu ? "translate-x-0" : "-translate-x-full"
         } lg:hidden flex flex-col absolute bg-darkBackground text-white bg-white left-0 top-20 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
       >
-        <Link href="/hero" className="text-blue-800">
+        <Link href="/" className="text-blue-800">
           Home
         </Link>
-        <Link href="/about" className="text-black hover:text-blue-800">
+        <Link href="/ui/about" className="text-black hover:text-blue-800">
           About Us
         </Link>
-        <Link href="/servicess" className="text-black hover:text-blue-800">
+        <Link href="/ui/servicess" className="text-black hover:text-blue-800">
           Service
         </Link>
 
-        <Link href="/gallery" className="text-black hover:text-blue-800">
+        <Link href="/ui/gallery" className="text-black hover:text-blue-800">
           Gallery
         </Link>
-        <Link href="/contacts" className="text-black hover:text-blue-800">
+        <Link href="/ui/contacts" className="text-black hover:text-blue-800">
           Contacts
         </Link>
       </div>
