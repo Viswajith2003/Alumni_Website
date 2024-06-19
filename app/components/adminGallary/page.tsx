@@ -1,6 +1,20 @@
 "use client";
-// pages/gallery-edit.js
 import { useState, useEffect } from "react";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import { db, storage } from "../../backend/firebase/config";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 
 export default function GalleryEdit() {
   const [gallery, setGallery] = useState([]);
@@ -12,43 +26,61 @@ export default function GalleryEdit() {
   });
 
   useEffect(() => {
-    // Retrieve gallery from local storage on component mount
-    const savedGallery = JSON.parse(localStorage.getItem("gallery")) || [];
-    setGallery(savedGallery);
+    const fetchGallery = async () => {
+      const querySnapshot = await getDocs(collection(db, "gallery"));
+      const fetchedGallery = [];
+      querySnapshot.forEach((doc) => {
+        fetchedGallery.push({ id: doc.id, ...doc.data() });
+      });
+      setGallery(fetchedGallery);
+    };
+
+    fetchGallery();
   }, []);
 
-  useEffect(() => {
-    // Save gallery to local storage whenever it changes
-    localStorage.setItem("gallery", JSON.stringify(gallery));
-  }, [gallery]);
-
-  const handleUpload = (event) => {
+  const handleUpload = async (event) => {
     event.preventDefault();
     const file = event.target.image.files[0];
     const galleryName = event.target.galleryName.value;
 
     if (file && galleryName) {
+      const storageRef = ref(storage, `images/${file.name}`);
+      await uploadBytes(storageRef, file);
+      const imgUrl = await getDownloadURL(storageRef);
+
       const newImage = {
-        id: isEditing ? currentItem.id : gallery.length + 1,
-        img: URL.createObjectURL(file),
+        img: imgUrl,
         galleryName,
       };
 
       if (isEditing) {
+        const docRef = doc(db, "gallery", currentItem.id);
+        await updateDoc(docRef, newImage);
         setGallery(
-          gallery.map((item) => (item.id === currentItem.id ? newImage : item))
+          gallery.map((item) =>
+            item.id === currentItem.id
+              ? { id: currentItem.id, ...newImage }
+              : item
+          )
         );
         setIsEditing(false);
         setCurrentItem({ id: null, img: "", galleryName: "" });
       } else {
-        setGallery([...gallery, newImage]);
+        const docRef = await addDoc(collection(db, "gallery"), newImage);
+        setGallery([...gallery, { id: docRef.id, ...newImage }]);
       }
 
       event.target.reset();
     }
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id, imgPath) => {
+    const docRef = doc(db, "gallery", id);
+    await deleteDoc(docRef);
+
+    const imageRef = ref(storage, imgPath);
+    await deleteObject(imageRef);
+
     setGallery(gallery.filter((item) => item.id !== id));
   };
 
@@ -59,7 +91,6 @@ export default function GalleryEdit() {
 
   return (
     <div className="container mx-auto p-4">
-      {/* Image Uploading Section */}
       <div className="mb-8 p-4 border rounded shadow-lg">
         <h2 className="text-xl font-semibold mb-4">
           {isEditing ? "Edit Image" : "Upload Image"}
@@ -97,7 +128,6 @@ export default function GalleryEdit() {
         </form>
       </div>
 
-      {/* Gallery List Section */}
       <div className="p-4 border rounded shadow-lg">
         <h2 className="text-xl font-semibold mb-4">Gallery List</h2>
         <table className="min-w-full bg-white border">
@@ -141,7 +171,7 @@ export default function GalleryEdit() {
                     Edit
                   </button>
                   <button
-                    onClick={() => handleDelete(item.id)}
+                    onClick={() => handleDelete(item.id, item.img)}
                     className="bg-red-500 text-white px-2 py-1 rounded"
                   >
                     Delete
