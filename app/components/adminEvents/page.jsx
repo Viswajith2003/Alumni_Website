@@ -1,83 +1,108 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../../backend/firebase/config";
+import Modal from "react-modal";
 
 const EventLists = () => {
-  // Define state variables for event form fields
   const [eventName, setEventName] = useState("");
   const [schedule, setSchedule] = useState("");
   const [description, setDescription] = useState("");
   const [bannerImage, setBannerImage] = useState(null);
-
-  // Define state variables for gallery list
   const [galleryList, setGalleryList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [viewEvent, setViewEvent] = useState(null);
 
-  // Function to handle event form submission
-  const handleEventSubmit = (e) => {
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const querySnapshot = await getDocs(collection(db, "events"));
+      const events = [];
+      querySnapshot.forEach((doc) => {
+        events.push({ id: doc.id, ...doc.data() });
+      });
+      setGalleryList(events);
+    };
+    fetchEvents();
+  }, []);
+
+  const handleEventSubmit = async (e) => {
     e.preventDefault();
 
-    // Create a new event object
+    let bannerImageUrl = "";
+    if (bannerImage) {
+      const storageRef = ref(storage, `images/${bannerImage.name}`);
+      await uploadBytes(storageRef, bannerImage);
+      bannerImageUrl = await getDownloadURL(storageRef);
+    }
+
     const newEvent = {
       eventName,
       schedule,
       description,
-      bannerImage,
+      bannerImage: bannerImageUrl,
     };
 
     if (isEditing) {
-      const updatedGalleryList = [...galleryList];
-      updatedGalleryList[currentIndex] = newEvent;
-      setGalleryList(updatedGalleryList);
+      const eventDoc = doc(db, "events", currentIndex);
+      await updateDoc(eventDoc, newEvent);
+      setGalleryList(
+        galleryList.map((event) =>
+          event.id === currentIndex ? { id: currentIndex, ...newEvent } : event
+        )
+      );
       setIsEditing(false);
       setCurrentIndex(null);
     } else {
-      // Add the new event to the gallery list
-      setGalleryList([...galleryList, newEvent]);
+      const docRef = await addDoc(collection(db, "events"), newEvent);
+      setGalleryList([...galleryList, { id: docRef.id, ...newEvent }]);
     }
 
-    // Clear the form fields after submission
     setEventName("");
     setSchedule("");
     setDescription("");
     setBannerImage(null);
   };
 
-  // Function to handle file input change
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setBannerImage(file);
   };
 
-  // Function to handle delete event from the gallery list
-  const handleDeleteEvent = (index) => {
-    const updatedGalleryList = [...galleryList];
-    updatedGalleryList.splice(index, 1);
-    setGalleryList(updatedGalleryList);
+  const handleDeleteEvent = async (id) => {
+    await deleteDoc(doc(db, "events", id));
+    setGalleryList(galleryList.filter((event) => event.id !== id));
   };
 
-  // Function to handle edit event
-  const handleEditEvent = (index) => {
-    const event = galleryList[index];
+  const handleEditEvent = (event) => {
     setEventName(event.eventName);
     setSchedule(event.schedule);
     setDescription(event.description);
     setBannerImage(event.bannerImage);
     setIsEditing(true);
-    setCurrentIndex(index);
+    setCurrentIndex(event.id);
   };
 
-  // Function to handle view event
-  const handleViewEvent = (index) => {
-    const event = galleryList[index];
-    alert(
-      `Event: ${event.eventName}\nSchedule: ${event.schedule}\nDescription: ${event.description}`
-    );
+  const handleViewEvent = (event) => {
+    setViewEvent(event);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <div className="flex flex-col justify-center items-center container mx-auto">
-      {/* First div for event form */}
       <div className="p-4 w-full">
         <h2 className="text-2xl text-center font-semibold mb-4">
           {isEditing ? "Edit Event" : "Create New Event"}
@@ -148,7 +173,6 @@ const EventLists = () => {
         </form>
       </div>
 
-      {/* Second div for gallery list */}
       <div className="p-4 w-full">
         <h2 className="text-2xl text-center font-semibold mb-4">
           Event Gallery
@@ -192,24 +216,28 @@ const EventLists = () => {
                   {event.description}
                 </td>
                 <td className="px-6 py-4 border-b border-gray-300">
-                  {event.bannerImage}
+                  <img
+                    src={event.bannerImage}
+                    alt={event.eventName}
+                    className="w-16 h-16 object-cover"
+                  />
                 </td>
                 <td className="px-6 py-4 border-b border-gray-300 space-x-2">
                   <button
                     className="bg-blue-500 text-white px-2 py-1 rounded"
-                    onClick={() => handleViewEvent(index)}
+                    onClick={() => handleViewEvent(event)}
                   >
                     View
                   </button>
                   <button
                     className="bg-green-500 text-white px-2 py-1 rounded"
-                    onClick={() => handleEditEvent(index)}
+                    onClick={() => handleEditEvent(event)}
                   >
                     Edit
                   </button>
                   <button
                     className="bg-red-500 text-white px-2 py-1 rounded"
-                    onClick={() => handleDeleteEvent(index)}
+                    onClick={() => handleDeleteEvent(event.id)}
                   >
                     Delete
                   </button>
@@ -219,6 +247,38 @@ const EventLists = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Modal for viewing event */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="View Event"
+      >
+        {viewEvent && (
+          <div>
+            <h2 className="text-2xl mb-4">{viewEvent.eventName}</h2>
+            <p>
+              <strong>Schedule:</strong> {viewEvent.schedule}
+            </p>
+            <p>
+              <strong>Description:</strong> {viewEvent.description}
+            </p>
+            {viewEvent.bannerImage && (
+              <img
+                src={viewEvent.bannerImage}
+                alt={viewEvent.eventName}
+                className="w-1/4 h-1/4 mt-4"
+              />
+            )}
+            <button
+              onClick={closeModal}
+              className="bg-red-500 text-white px-4 py-2 rounded mt-4"
+            >
+              Close
+            </button>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };
