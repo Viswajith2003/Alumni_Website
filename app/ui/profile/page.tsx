@@ -139,6 +139,11 @@ function Profile() {
     setShowSubmitButton(true); // Show the submit button when form data changes
   };
 
+  const handleCancel = () => {
+    setFormData(singleDoc as FormData);
+    setShowSubmitButton(false);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (user) {
@@ -372,12 +377,21 @@ function Profile() {
           {/* Submit Button */}
           <div className="text-center mt-6">
             {showSubmitButton && (
-              <button
-                type="submit"
-                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                Submit
-              </button>
+              <div>
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  className="px-6 mx-2 py-2 border-2 border-blue-500 bg-white text-black hover:text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2 mx-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  update
+                </button>
+              </div>
             )}
           </div>
         </form>
