@@ -47,13 +47,16 @@ const JobList = () => {
 
   const handleDelete = (userId, jobId) => {
     const jobRef = ref(database, `jobs/${userId}/${jobId}`);
-    remove(jobRef)
-      .then(() => {
-        console.log("Job deleted successfully");
-      })
-      .catch((error) => {
-        console.error("Error deleting job: ", error);
-      });
+
+    if (window.confirm("Are you sure you want to delete this job?")) {
+      remove(jobRef)
+        .then(() => {
+          console.log("Job deleted successfully");
+        })
+        .catch((error) => {
+          console.error("Error deleting job: ", error);
+        });
+    }
   };
 
   const handleEdit = (job) => {
