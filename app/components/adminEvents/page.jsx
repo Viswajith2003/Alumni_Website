@@ -76,9 +76,9 @@ const EventLists = () => {
   };
 
   return (
-    <div className="flex ">
+    <div className="flex flex-col justify-center items-center container mx-auto">
       {/* First div for event form */}
-      <div className="p-4 w-1/2">
+      <div className="p-4 w-full">
         <h2 className="text-2xl text-center font-semibold mb-4">
           {isEditing ? "Edit Event" : "Create New Event"}
         </h2>
@@ -86,58 +86,65 @@ const EventLists = () => {
           onSubmit={handleEventSubmit}
           className="space-y-4 border border-black p-4"
         >
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Event Name
-            </label>
-            <input
-              type="text"
-              value={eventName}
-              onChange={(e) => setEventName(e.target.value)}
-              className="mt-1 p-2 border rounded w-full"
-              required
-            />
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Event Name
+              </label>
+              <input
+                type="text"
+                value={eventName}
+                onChange={(e) => setEventName(e.target.value)}
+                className="mt-1 p-2 border rounded w-full"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Schedule
+              </label>
+              <input
+                type="text"
+                value={schedule}
+                onChange={(e) => setSchedule(e.target.value)}
+                className="mt-1 p-2 border rounded w-full"
+                required
+              />
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Schedule
-            </label>
-            <input
-              type="text"
-              value={schedule}
-              onChange={(e) => setSchedule(e.target.value)}
-              className="mt-1 p-2 border rounded w-full"
-              required
-            />
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Description
+              </label>
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="mt-1 p-2 border rounded w-full"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Banner Image
+              </label>
+              <input
+                type="file"
+                onChange={handleFileChange}
+                className="mt-1 p-2 border rounded w-full"
+                required={!isEditing}
+              />
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Description
-            </label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="mt-1 p-2 border rounded w-full"
-              required
-            />
+          <div className="grid">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded place-self-end"
+            >
+              {isEditing ? "Update" : "Upload"}
+            </button>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Banner Image
-            </label>
-            <input
-              type="file"
-              onChange={handleFileChange}
-              className="mt-1 p-2 border rounded w-full"
-              required={!isEditing}
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            {isEditing ? "Update" : "Upload"}
-          </button>
         </form>
       </div>
 
@@ -162,6 +169,9 @@ const EventLists = () => {
                 Description
               </th>
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600">
+                Banner
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-gray-600">
                 Actions
               </th>
             </tr>
@@ -180,6 +190,9 @@ const EventLists = () => {
                 </td>
                 <td className="px-6 py-4 border-b border-gray-300">
                   {event.description}
+                </td>
+                <td className="px-6 py-4 border-b border-gray-300">
+                  {event.bannerImage}
                 </td>
                 <td className="px-6 py-4 border-b border-gray-300 space-x-2">
                   <button
