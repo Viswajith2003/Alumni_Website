@@ -15,10 +15,12 @@ import {
 import data from "../../constants/jobData";
 import { useState, useEffect } from "react";
 import { getDatabase, ref, onValue, remove, update } from "firebase/database";
+import EditJobPopup from "./EditJobPopup";
 
 const JobDetails = () => {
   const [jobs, setJobs] = useState([]);
   const [currentUserUID, setCurrentUserUID] = useState(null);
+  const [editingJob, setEditingJob] = useState(null);
 
   useEffect(() => {
     const userFromStorage = JSON.parse(localStorage.getItem("user") || "null");
@@ -58,9 +60,13 @@ const JobDetails = () => {
       });
   };
 
-  const handleEdit = (userId, jobId, updatedJob) => {
+  const handleEdit = (job) => {
+    setEditingJob(job);
+  };
+
+  const handleSave = (updatedJob) => {
     const db = getDatabase();
-    const jobRef = ref(db, `jobs/${userId}/${jobId}`);
+    const jobRef = ref(db, `jobs/${updatedJob.userId}/${updatedJob.id}`);
     update(jobRef, updatedJob)
       .then(() => {
         console.log("Job updated successfully");
@@ -68,6 +74,10 @@ const JobDetails = () => {
       .catch((error) => {
         console.error("Error updating job: ", error);
       });
+  };
+
+  const handleClose = () => {
+    setEditingJob(null);
   };
 
   const capitalizeEachWord = (str) => {
@@ -184,7 +194,7 @@ const JobDetails = () => {
               <div className="lg:flex flex-row items-center gap-4">
                 <button
                   className="hover:border-2 hover:border-blue-800 p-1 h-10 w-24 rounded-lg bg-blue-800 hover:bg-white text-white  hover:text-[15px] hover:scale-95 hover:text-blue-700 flex items-center justify-evenly"
-                  onClick={() => handleEdit(job.userId, job.id, job)}
+                  onClick={() => handleEdit(job)}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} className="w-6 h-6" />
                   <h2 className="font-bold">Edit</h2>
@@ -200,6 +210,13 @@ const JobDetails = () => {
             )}
           </div>
         ))}
+        {editingJob && (
+          <EditJobPopup
+            job={editingJob}
+            onClose={handleClose}
+            onSave={handleSave}
+          />
+        )}
       </div>
     </div>
   );
