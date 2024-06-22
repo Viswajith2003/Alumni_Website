@@ -25,15 +25,17 @@ const EditJobPopup = ({ job, onClose, onSave }) => {
     <div className="popup">
       <div className="popup-content">
         <div className="flex justify-between">
-          <h2 className="font-bold text-2xl text-blue-600">Edit Job</h2>
+          <h2 className="font-bold text-3xl text-blue-600 mt-2">Edit Job</h2>
           <div className="flex">
-            <TiTickOutline
-              onClick={handleSave}
-              className="w-8 h-8 font-bold text-green-600"
-            />
+            <div className="flex justify-center items-center border-4 border-green-400 rounded-full mr-2 p-1">
+              <TiTickOutline
+                onClick={handleSave}
+                className="w-8 h-8 font-bold text-green-600"
+              />
+            </div>
             <IoMdCloseCircleOutline
               onClick={onClose}
-              className="w-8 h-8 font-bold text-red-600"
+              className="w-12 h-12 font-bold text-red-600"
             />
           </div>
         </div>

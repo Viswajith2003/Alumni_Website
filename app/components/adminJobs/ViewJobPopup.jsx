@@ -6,10 +6,10 @@ const ViewJobPopup = ({ job, onClose }) => {
     <div className="popup">
       <div className="popup-content">
         <div className="flex justify-between">
-          <h2 className="font-bold text-2xl text-blue-600">View Job</h2>
+          <h2 className="font-bold text-3xl text-blue-600 mt-2">View Job</h2>
           <IoMdCloseCircleOutline
             onClick={onClose}
-            className="w-8 h-8 font-bold text-red-600"
+            className="w-12 h-12 font-bold text-red-600"
           />
         </div>
         <div className="mt-8 p-4 border rounded-lg bg-white shadow-md space-y-4">
