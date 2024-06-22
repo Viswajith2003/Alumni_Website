@@ -1,8 +1,17 @@
 import React from "react";
-import Navbar from "../navbar/page";
-import data from "./data";
+import Navbar from "../navbar/page"; // Ensure this import is correct
+import data from "./data"; // Ensure the data import is correct
 
-export default function Dashboard({ sidebarToggle, setSidebarToggle }) {
+// Define the interface for the props
+interface DashboardProps {
+  sidebarToggle: string;
+  setSidebarToggle: (toggle: string) => void;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({
+  sidebarToggle,
+  setSidebarToggle,
+}) => {
   return (
     <div className={`${sidebarToggle} bg-gray-200 h-full p-5 overflow-hidden`}>
       <div className="bg-gray-200 h-[840px] p-5">
@@ -24,4 +33,6 @@ export default function Dashboard({ sidebarToggle, setSidebarToggle }) {
       </div>
     </div>
   );
-}
+};
+
+export default Dashboard;
