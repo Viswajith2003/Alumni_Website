@@ -1,6 +1,7 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { database } from "../../backend/firebase/config";
 import {
   faTrashCan,
   faBriefcase,
@@ -30,8 +31,7 @@ const JobDetails = () => {
   }, []);
 
   useEffect(() => {
-    const db = getDatabase();
-    const jobsRef = ref(db, "jobs");
+    const jobsRef = ref(database, "jobs");
     onValue(jobsRef, (snapshot) => {
       const data = snapshot.val();
       const allJobs = [];
@@ -49,8 +49,7 @@ const JobDetails = () => {
   }, []);
 
   const handleDelete = (userId, jobId) => {
-    const db = getDatabase();
-    const jobRef = ref(db, `jobs/${userId}/${jobId}`);
+    const jobRef = ref(database, `jobs/${userId}/${jobId}`);
     remove(jobRef)
       .then(() => {
         console.log("Job deleted successfully");
@@ -65,8 +64,7 @@ const JobDetails = () => {
   };
 
   const handleSave = (updatedJob) => {
-    const db = getDatabase();
-    const jobRef = ref(db, `jobs/${updatedJob.userId}/${updatedJob.id}`);
+    const jobRef = ref(database, `jobs/${updatedJob.userId}/${updatedJob.id}`);
     update(jobRef, updatedJob)
       .then(() => {
         console.log("Job updated successfully");
