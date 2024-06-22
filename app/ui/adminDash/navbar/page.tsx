@@ -1,10 +1,16 @@
+// Ensure this is the correct path and that the component is properly exported
 import Link from "next/link";
 import React from "react";
 import { FaBars, FaBell, FaSearch, FaUserCircle } from "react-icons/fa";
 
-export function Navbar({ sidebarToggle, setSidebarToggle }) {
+interface NavbarProps {
+  sidebarToggle: boolean;
+  setSidebarToggle: (toggle: boolean) => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ sidebarToggle, setSidebarToggle }) => {
   return (
-    <div className="bg-slate-400 px-4 py-3 flex min-h-20 justify-between items-center w-full ">
+    <div className="bg-slate-400 px-4 py-3 flex min-h-20 justify-between items-center w-full">
       <div className="flex items-center text-xl">
         <FaBars
           className="me-4 cursor-pointer"
@@ -53,4 +59,6 @@ export function Navbar({ sidebarToggle, setSidebarToggle }) {
       </div>
     </div>
   );
-}
+};
+
+export default Navbar;
