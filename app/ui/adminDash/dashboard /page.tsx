@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { ref, get, child } from "firebase/database";
-import Navbar from "../navbar/page";
 import { db, database } from "../../../backend/firebase/config"; // Adjust the path as needed
 import { HiUser } from "react-icons/hi";
-import { FaRegMessage } from "react-icons/fa6";
 import { FaUserGraduate } from "react-icons/fa";
 import { PiNotepad } from "react-icons/pi";
 
