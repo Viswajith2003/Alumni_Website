@@ -3,7 +3,11 @@ import Link from "next/link";
 import Data from "./data";
 import { IoLogOutOutline } from "react-icons/io5";
 
-export default function Sidebar({ sidebarToggle }) {
+export default function Sidebar({
+  sidebarToggle,
+  setActiveScreen,
+  activeScreen,
+}) {
   return (
     <div
       className={`${
@@ -22,12 +26,17 @@ export default function Sidebar({ sidebarToggle }) {
         {Data.map((item, index) => (
           <li
             key={index}
-            className="mb-2 rounded hover:shadow hover:bg-blue-500 py-2"
+            className={`mb-2 rounded hover:shadow hover:bg-blue-500 py-2 ${
+              activeScreen === item.screen ? "bg-blue-500" : ""
+            }`}
           >
-            <Link href={item.path} className="px-3 flex items-center gap-2">
+            <button
+              onClick={() => setActiveScreen(item.screen)}
+              className="px-3 flex items-center gap-2 w-full text-left"
+            >
               <item.icon className="w-6 h-6" />
               <h2 className="text-xl font-semibold">{item.name}</h2>
-            </Link>
+            </button>
           </li>
         ))}
         <li className="mb-2 rounded hover:shadow hover:bg-blue-500 py-2">
