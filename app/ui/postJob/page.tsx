@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { getDatabase, ref, set } from "firebase/database";
+import { database } from "../../backend/firebase/config";
 import { v4 as uuidv4 } from "uuid";
 
 const PostJob = () => {
@@ -34,9 +35,8 @@ const PostJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentUserUID) {
-      const db = getDatabase();
       const jobId = uuidv4(); // Generate a unique ID for each job
-      set(ref(db, `jobs/${currentUserUID}/${jobId}`), jobDetails)
+      set(ref(database, `jobs/${currentUserUID}/${jobId}`), jobDetails)
         .then(() => {
           console.log("Job details added successfully");
         })

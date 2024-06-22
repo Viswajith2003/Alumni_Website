@@ -1,21 +1,79 @@
-import React, { FC } from "react";
-import Navbar from "../navbar/page"; // Ensure this import is correct
-import data from "./data"; // Ensure the data import is correct
+import React, { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { ref, get, child } from "firebase/database";
+import { db, database } from "../../../backend/firebase/config"; // Adjust the path as needed
+import { HiUser } from "react-icons/hi";
+import { FaUserGraduate } from "react-icons/fa";
+import { PiNotepad } from "react-icons/pi";
 
-// Define the interface for the props
-interface DashboardProps {
-  sidebarToggle: boolean; // assuming sidebarToggle is a boolean
-  setSidebarToggle: (toggle: boolean) => void; // assuming setSidebarToggle is a function that takes a boolean
-}
+export default function Dashboard({ sidebarToggle, setSidebarToggle }) {
+  const [data, setData] = useState([
+    { icon: HiUser, num: 0, name: "Total Alumni", color: "bg-blue-500" },
+    {
+      icon: FaUserGraduate,
+      num: 0,
+      name: "Posted Jobs",
+      color: "bg-green-500",
+    },
+    {
+      icon: PiNotepad,
+      num: 0,
+      name: "Upcoming Events",
+      color: "bg-yellow-500",
+    },
+  ]);
 
-// Annotate the Dashboard component with the defined prop types
-const Dashboard: FC<DashboardProps> = ({ sidebarToggle, setSidebarToggle }) => {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // Fetch total alumni count from Firestore
+        const alumniSnapshot = await getDocs(collection(db, "users"));
+        const totalAlumni = alumniSnapshot.size;
+
+        // Fetch posted jobs count from Realtime Database
+        const jobsRef = ref(database, "jobs");
+        const jobsSnapshot = await get(jobsRef);
+        let totalJobs = 0;
+
+        jobsSnapshot.forEach((userJobsSnapshot) => {
+          totalJobs += userJobsSnapshot.size;
+        });
+
+        // Fetch upcoming events count from Firestore
+        const eventsSnapshot = await getDocs(collection(db, "events"));
+        const totalEvents = eventsSnapshot.size;
+
+        // Update the state with the fetched data
+        setData([
+          {
+            icon: HiUser,
+            num: totalAlumni,
+            name: "Total Alumni",
+            color: "bg-blue-500",
+          },
+          {
+            icon: FaUserGraduate,
+            num: totalJobs,
+            name: "Posted Jobs",
+            color: "bg-green-500",
+          },
+          {
+            icon: PiNotepad,
+            num: totalEvents,
+            name: "Upcoming Events",
+            color: "bg-yellow-500",
+          },
+        ]);
+      } catch (error) {
+        console.error("Error fetching data from Firebase:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
-    <div
-      className={`${
-        sidebarToggle ? "sidebar-open" : "sidebar-closed"
-      } bg-gray-200 h-full p-5 overflow-hidden`}
-    >
+    <div className={`${sidebarToggle} bg-gray-200 h-full p-5 overflow-hidden`}>
       <div className="bg-gray-200 h-[840px] p-5">
         <div className="flex p-8 gap-12">
           {data.map((item, index) => (
@@ -35,6 +93,4 @@ const Dashboard: FC<DashboardProps> = ({ sidebarToggle, setSidebarToggle }) => {
       </div>
     </div>
   );
-};
-
-export default Dashboard;
+}
