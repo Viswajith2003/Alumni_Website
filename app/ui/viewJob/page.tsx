@@ -16,7 +16,7 @@ import {
 import data from "../../constants/jobData";
 import { useState, useEffect } from "react";
 import { getDatabase, ref, onValue, remove, update } from "firebase/database";
-import EditJobPopup from "./EditJobPopup";
+import EditJobPopup from "../../components/adminJobs/EditJobPopup";
 
 const JobDetails = () => {
   const [jobs, setJobs] = useState([]);

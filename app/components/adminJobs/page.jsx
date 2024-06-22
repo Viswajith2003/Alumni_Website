@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { ref, onValue, remove, update } from "firebase/database";
 import { doc, getDoc } from "firebase/firestore";
-import EditJobPopup from "../../ui/viewJob/EditJobPopup";
+import EditJobPopup from "./EditJobPopup.jsx";
 import { db, database } from "../../backend/firebase/config";
 import ViewJobPopup from "./ViewJobPopup.jsx";
 
