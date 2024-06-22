@@ -105,7 +105,7 @@ const JobList = () => {
           </thead>
           <tbody>
             {jobs.map((job, index) => (
-              <tr key={job.id}>
+              <tr key={job.id} className="">
                 <td className="border border-gray-300 px-4 py-2">
                   {index + 1}
                 </td>
@@ -120,7 +120,7 @@ const JobList = () => {
                   {userDetails[job.userId]?.lastname}
                   {/* {job.userId} */}
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="border border-gray-300 px-4 py-2 space-x-4">
                   <button
                     className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
                     onClick={() => handleView(job)}
@@ -128,7 +128,7 @@ const JobList = () => {
                     View
                   </button>
                   <button
-                    className="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                    className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
                     onClick={() => handleEdit(job)}
                   >
                     Edit
