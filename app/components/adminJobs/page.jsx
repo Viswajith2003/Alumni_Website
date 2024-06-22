@@ -4,7 +4,7 @@ import { ref, onValue, remove, update } from "firebase/database";
 import { doc, getDoc } from "firebase/firestore";
 import EditJobPopup from "../../ui/viewJob/EditJobPopup";
 import { db, database } from "../../backend/firebase/config";
-import ViewJobPopup from "./ViewJobPopup";
+import ViewJobPopup from "./ViewJobPopup.jsx";
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
@@ -105,7 +105,7 @@ const JobList = () => {
           </thead>
           <tbody>
             {jobs.map((job, index) => (
-              <tr key={job.id} className="">
+              <tr key={job.id} className="text-center">
                 <td className="border border-gray-300 px-4 py-2">
                   {index + 1}
                 </td>
@@ -122,13 +122,13 @@ const JobList = () => {
                 </td>
                 <td className="border border-gray-300 px-4 py-2 space-x-4">
                   <button
-                    className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                    className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
                     onClick={() => handleView(job)}
                   >
                     View
                   </button>
                   <button
-                    className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
                     onClick={() => handleEdit(job)}
                   >
                     Edit
