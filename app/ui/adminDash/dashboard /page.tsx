@@ -1,19 +1,21 @@
-import React from "react";
+import React, { FC } from "react";
 import Navbar from "../navbar/page"; // Ensure this import is correct
 import data from "./data"; // Ensure the data import is correct
 
 // Define the interface for the props
 interface DashboardProps {
-  sidebarToggle: string;
-  setSidebarToggle: (toggle: string) => void;
+  sidebarToggle: boolean; // assuming sidebarToggle is a boolean
+  setSidebarToggle: (toggle: boolean) => void; // assuming setSidebarToggle is a function that takes a boolean
 }
 
-const Dashboard: React.FC<DashboardProps> = ({
-  sidebarToggle,
-  setSidebarToggle,
-}) => {
+// Annotate the Dashboard component with the defined prop types
+const Dashboard: FC<DashboardProps> = ({ sidebarToggle, setSidebarToggle }) => {
   return (
-    <div className={`${sidebarToggle} bg-gray-200 h-full p-5 overflow-hidden`}>
+    <div
+      className={`${
+        sidebarToggle ? "sidebar-open" : "sidebar-closed"
+      } bg-gray-200 h-full p-5 overflow-hidden`}
+    >
       <div className="bg-gray-200 h-[840px] p-5">
         <div className="flex p-8 gap-12">
           {data.map((item, index) => (
