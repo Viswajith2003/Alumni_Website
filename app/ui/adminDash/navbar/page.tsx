@@ -4,7 +4,7 @@ import { FaBars, FaBell, FaSearch, FaUserCircle } from "react-icons/fa";
 
 export default function Navbar({ sidebarToggle, setSidebarToggle }) {
   return (
-    <div className="bg-slate-400 px-4 py-3 flex h-20 justify-between items-center w-full ">
+    <div className="bg-slate-400 px-4 py-3 flex min-h-20 justify-between items-center w-full ">
       <div className="flex items-center text-xl">
         <FaBars
           className="me-4 cursor-pointer"

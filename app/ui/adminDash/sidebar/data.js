@@ -6,48 +6,47 @@ import { FaUserGraduate } from "react-icons/fa";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { GrGallery } from "react-icons/gr";
 import { MdOutgoingMail } from "react-icons/md";
-import { IoLogOutOutline } from "react-icons/io5";
 
 const data = [
   {
     name: "Dashboard",
     icon: AiOutlineDashboard,
-    path: "/ui/adminDash/dashboard",
+    screen: "dashboard",
   },
   {
     name: "Alumni List",
     icon: HiUser,
-    path: "/components/adminAlumniList",
+    screen: "alumniList",
   },
   {
     name: "Gallery",
     icon: GrGallery,
-    path: "/components/adminGallary",
+    screen: "gallery",
   },
   {
     name: "Add Event",
     icon: PiNotepad,
-    path: "/components/adminEvents",
+    screen: "addEvents",
   },
   {
     name: "Jobs",
     icon: FaUserGraduate,
-    path: "/components/adminJobs",
+    screen: "jobs",
   },
   {
     name: "Feedback",
     icon: FaRegMessage,
-    path: "/feedback",
+    screen: "feedback",
   },
   {
     name: "Share Idea",
     icon: IoShareSocialOutline,
-    path: "/share-idea",
+    screen: "shareIdea",
   },
   {
     name: "Send Mail",
     icon: MdOutgoingMail,
-    path: "/send-mail",
+    screen: "sendMail",
   },
 ];
 
