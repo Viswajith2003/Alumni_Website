@@ -13,7 +13,7 @@ const data = [
   {
     icon: FaRegMessage,
     num: 3,
-    name: "Forum topics",
+    name: "New ideas",
     color: "bg-red-500",
   },
   {
