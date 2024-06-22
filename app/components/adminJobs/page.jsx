@@ -1,10 +1,11 @@
 "use client";
+import { IoMdAdd } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { ref, onValue, remove, update } from "firebase/database";
 import { doc, getDoc } from "firebase/firestore";
-import EditJobPopup from "../../ui/viewJob/EditJobPopup";
+import EditJobPopup from "./EditJobPopup.jsx";
 import { db, database } from "../../backend/firebase/config";
-import ViewJobPopup from "./ViewJobPopup";
+import ViewJobPopup from "./ViewJobPopup.jsx";
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
@@ -88,9 +89,10 @@ const JobList = () => {
     <div>
       <div className="container mx-auto mt-8">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">Jobs List</h1>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-            New
+          <h1 className="text-4xl font-bold">Jobs List</h1>
+          <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex">
+            <IoMdAdd className="w-8 h-8" />
+            <h1 className="font-bold text-2xl">New</h1>
           </button>
         </div>
         <table className="w-full border-collapse border border-gray-300">
@@ -105,7 +107,7 @@ const JobList = () => {
           </thead>
           <tbody>
             {jobs.map((job, index) => (
-              <tr key={job.id}>
+              <tr key={job.id} className="text-center">
                 <td className="border border-gray-300 px-4 py-2">
                   {index + 1}
                 </td>
@@ -120,15 +122,15 @@ const JobList = () => {
                   {userDetails[job.userId]?.lastname}
                   {/* {job.userId} */}
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="border border-gray-300 px-4 py-2 space-x-4">
                   <button
-                    className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                    className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
                     onClick={() => handleView(job)}
                   >
                     View
                   </button>
                   <button
-                    className="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                    className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
                     onClick={() => handleEdit(job)}
                   >
                     Edit
