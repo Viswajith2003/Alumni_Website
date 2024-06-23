@@ -89,7 +89,7 @@ const JobDetails = () => {
         {jobs.map((job) => (
           <div
             key={job.id}
-            className="w-full h-auto bg-[#dce2f0] p-5 rounded-lg mx-2 my-2"
+            className="w-full h-auto bg-[#dce2f0] p-5 rounded-lg mx-2 my-2 hover:scale-95"
           >
             <h1 className="text-2xl font-extrabold mb-4 text-center">
               Company Name:
