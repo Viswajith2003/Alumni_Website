@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Roller } from "react-css-spinners";
 import React from "react";
+import { FaUser, FaLock } from "react-icons/fa"; // Import icons
+import Image from "next/image"; // Import Image component
+import backgroundImg from "../../../public/images/alumniLog.jpg"; // Import the background image
 
 // Define the LoadingScreen component
 const LoadingScreen = () => (
@@ -97,29 +100,42 @@ const Login = () => {
   }
 
   return (
-    <div className="bg-[#edeced] h-screen flex justify-center items-center ">
-      <div className="bg-white w-[560px] rounded-xl p-4 flex flex-col justify-center items-center">
-        <div className="flex flex-col justify-center items-center">
-          <h1 className=" font-bold text-3xl mt-5 text-blue-700 ">LOGIN</h1>
-          <div className="block w-auto h-auto mb-4 mt-5">
+    <div className="relative h-screen flex justify-center items-center">
+      <Image
+        src={backgroundImg}
+        alt="Background Image"
+        layout="fill"
+        objectFit="cover"
+        quality={100}
+        className="absolute z-0"
+      />
+      <div className="relative w-[560px] rounded-xl p-4 flex flex-col justify-center items-center backdrop-blur-md bg-white bg-opacity-30 z-10">
+        <div className="flex flex-col justify-center items-left">
+          <div className="mb-8 text-left">
+            <h1 className="font-bold text-4xl mt-5">Please Login</h1>
+            <h3 className="font-semibold text-xl">to Your account !</h3>
+          </div>
+          <div className="block w-auto h-auto mb-4 mt-5 relative">
+            <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border-2 border-black p-3 rounded-xl w-[400px]"
+              className="border-2 border-black p-3 rounded-xl w-[400px] pl-10"
             />
             {errors.email && (
               <p className="text-red-600 text-left">{errors.email}</p>
             )}
           </div>
-          <div className="block w-auto h-auto mb-4">
+          <div className="block w-auto h-auto mb-4 relative">
+            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border-2 border-black p-3 rounded-xl w-[400px]"
+              className="border-2 border-black p-3 rounded-xl w-[400px] pl-10"
             />
             {errors.password && (
               <p className="text-red-600 text-left">{errors.password}</p>
@@ -136,12 +152,14 @@ const Login = () => {
             />
             <p className="text-[20px] font-semibold">Remember me</p>
           </div>
-          <p className="text-[16px] font-semibold">Forgot password?</p>
+          <p className="text-[16px] font-semibold text-red-600 hover:scale-95 cursor-pointer">
+            Forgot password?
+          </p>
         </div>
 
         <button
           onClick={handleSubmit}
-          className="mt-5 h-[50px] w-[400px] bg-blue-700 p-2 rounded-xl text-white font-bold mb-1"
+          className="mt-5 h-[50px] w-[400px] bg-blue-700 p-2 rounded-xl text-white font-bold mb-1 hover:scale-95"
         >
           <h1 className="text-2xl font-bold">Login </h1>
         </button>
@@ -152,7 +170,7 @@ const Login = () => {
         <div className="flex justify-start w-[400px] p-1 mb-6">
           <p className="text-[16px] font-normal">Don't have an account? </p>
           <Link href="/authentication/register">
-            <p className="text-[16px] font-semibold text-blue-700 ml-2">
+            <p className="text-[16px] font-semibold text-blue-700 ml-2 hover:scale-95">
               Register
             </p>
           </Link>

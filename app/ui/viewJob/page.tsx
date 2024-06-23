@@ -83,9 +83,9 @@ const JobDetails = () => {
   };
 
   return (
-    <div className="pt-4 flex flex-col justify-center items-center text-center h-auto ">
+    <div className="pt-4 flex flex-col justify-center items-center text-center h-auto">
       <h1 className="text-3xl font-bold mb-5 w-auto">Available Jobs</h1>
-      <div className="head grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full px-4">
+      <div className="head grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full px-4 mr-5">
         {jobs.map((job) => (
           <div
             key={job.id}
