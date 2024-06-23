@@ -1,7 +1,7 @@
 import { Roller } from "react-css-spinners";
 import React from "react";
 
-export default function loading() {
+export default function LoadingScreen() {
   return (
     <div
       style={{

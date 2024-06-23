@@ -1,10 +1,25 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../backend/firebase/config";
 import { useRouter } from "next/navigation";
-// import { AuthContext } from "../../backend/AuthContext";
 import Link from "next/link";
+import { Roller } from "react-css-spinners";
+import React from "react";
+
+// Define the LoadingScreen component
+const LoadingScreen = () => (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+    }}
+  >
+    <Roller color="rgba(6,90,253,1)" size={100} />
+  </div>
+);
 
 const Login = () => {
   // Define the type for errors state
@@ -13,13 +28,13 @@ const Login = () => {
     password?: string;
     general?: string;
   }
-  // const { dispatch } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -34,23 +49,24 @@ const Login = () => {
   }, [user]);
 
   const handleSignIn = async () => {
+    setIsLoading(true); // Start loading
     try {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          // dispatch({ type: "LOGIN", payload: user });
-          console.log(user);
-          setUser(user);
-        })
-        .catch((error) => {
-          console.log(error);
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            general: error.message,
-          }));
-        });
-    } catch (e) {
-      setErrors((prevErrors) => ({ ...prevErrors, general: e.message }));
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log(user);
+      setUser(user);
+    } catch (error) {
+      console.log(error);
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        general: error.message,
+      }));
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -75,6 +91,10 @@ const Login = () => {
     }
     handleSignIn();
   };
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="bg-[#edeced] h-screen flex justify-center items-center ">
@@ -141,4 +161,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;
