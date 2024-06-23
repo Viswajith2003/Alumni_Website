@@ -93,7 +93,7 @@ const JobDetails = () => {
           >
             <h1 className="text-2xl font-extrabold mb-4 text-center">
               Company Name:
-              <span className="font-normal">
+              <span className="text-[#6e36f1] font-bold">
                 {" " + capitalizeEachWord(job.companyName)}
               </span>
             </h1>
@@ -104,74 +104,73 @@ const JobDetails = () => {
             </p>
             <hr className="mb-3" />
             <hr className="mb-3" />
-            <div className="mb-3">
+            <div className="mb-3 flex flex-col justify-center items-start ml-12">
               <p className="text-lg font-bold flex items-center">
                 <FontAwesomeIcon
                   icon={faBriefcase}
-                  className="w-4 h-4 text-blue-700 mr-1"
+                  className="w-4 h-4 text-blue-700 mr-2"
                 />
-                Job Role:
+                <span className="mr-2">Job Role:</span>
                 <span className="font-normal">
-                  {" " + capitalizeEachWord(job.jobRole)}
+                  {capitalizeEachWord(job.jobRole)}
                 </span>
               </p>
               <p className="text-lg font-bold flex items-center">
                 <FontAwesomeIcon
                   icon={faLocationDot}
-                  className="w-4 h-4 text-blue-700 mr-1"
+                  className="w-4 h-4 text-blue-700 mr-2"
                 />
-                Location:
+                <span className="mr-2">Location:</span>
                 <span className="font-normal">
-                  {" " + capitalizeEachWord(job.location)}
+                  {capitalizeEachWord(job.location)}
                 </span>
               </p>
               <p className="text-lg font-bold flex items-center">
                 <FontAwesomeIcon
                   icon={faCode}
-                  className="w-6 h-6 text-blue-700 mr-1"
+                  className="w-6 h-6 text-blue-700 mr-2"
                 />
-                Required_Skill:
+                <span className="mr-2">Required Skill:</span>
                 <span className="font-normal capitalize">
-                  {" " + job.requiredSkill}
+                  {job.requiredSkill}
                 </span>
               </p>
               <p className="text-lg font-bold flex items-center">
                 <FontAwesomeIcon
                   icon={faAddressCard}
-                  className="w-4 h-4 text-blue-700 mr-1"
+                  className="w-4 h-4 text-blue-700 mr-2"
                 />
-                Course_Specialization:
-                <span className="font-normal ">
-                  {" " + job.courseSpecialization}
-                </span>
+                <span className="mr-2">Course Specialization:</span>
+                <span className="font-normal">{job.courseSpecialization}</span>
               </p>
               <p className="text-lg font-bold flex items-center">
                 <FontAwesomeIcon
                   icon={faCreditCard}
-                  className="w-4 h-4 text-blue-700 mr-1"
+                  className="w-4 h-4 text-blue-700 mr-2"
                 />
-                Salary:
-                <span className="font-normal">{" " + job.salary}</span>
+                <span className="mr-2">Salary:</span>
+                <span className="font-normal">{job.salary}</span>
               </p>
               <p className="text-lg font-bold flex items-center">
                 <FontAwesomeIcon
                   icon={faRankingStar}
-                  className="w-4 h-4 text-blue-700 mr-1"
+                  className="w-4 h-4 text-blue-700 mr-2"
                 />
-                Experience:
+                <span className="mr-2">Experience:</span>
                 <span className="font-normal">
-                  {" " + capitalizeEachWord(job.experience)}
+                  {capitalizeEachWord(job.experience)}
                 </span>
               </p>
               <p className="text-lg font-bold flex items-center">
                 <FontAwesomeIcon
                   icon={faPhone}
-                  className="w-4 h-4 text-blue-700 mr-1"
+                  className="w-4 h-4 text-blue-700 mr-2"
                 />
-                Contact_Info:
-                <span className="font-normal">{" " + job.contactInfo}</span>
+                <span className="mr-2">Contact Info:</span>
+                <span className="font-normal">{job.contactInfo}</span>
               </p>
             </div>
+
             {currentUserUID !== job.userId ? (
               <>
                 <div className="lg:flex flex-row items-center gap-4">
@@ -189,16 +188,16 @@ const JobDetails = () => {
                 </div>
               </>
             ) : (
-              <div className="lg:flex flex-row items-center gap-4">
+              <div className="lg:flex flex-row justify-center items-center gap-4 mt-8">
                 <button
-                  className="hover:border-2 hover:border-blue-800 p-1 h-10 w-24 rounded-lg bg-blue-800 hover:bg-white text-white  hover:text-[15px] hover:scale-95 hover:text-blue-700 flex items-center justify-evenly"
+                  className=" p-1 h-10 w-24 rounded-lg bg-green-600 hover:bg-green-700 text-white  hover:text-[15px] hover:scale-95 hover:text-white flex items-center justify-evenly"
                   onClick={() => handleEdit(job)}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} className="w-6 h-6" />
                   <h2 className="font-bold">Edit</h2>
                 </button>
                 <button
-                  className="border-2 border-blue-800 p-1 h-10 w-24 rounded-lg hover:bg-blue-800 hover:text-white hover:text-[15px] hover:scale-95 text-blue-700 flex items-center justify-evenly"
+                  className="bg-red-500 border-2 p-1 h-10 w-24 rounded-lg hover:bg-red-600 hover:text-white hover:text-[15px] hover:scale-95 text-white flex items-center justify-evenly"
                   onClick={() => handleDelete(job.userId, job.id)}
                 >
                   <FontAwesomeIcon icon={faTrashCan} className="w-6 h-6" />
