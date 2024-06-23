@@ -9,6 +9,9 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { userInputs } from "../../constants/formSource";
 import { Roller } from "react-css-spinners";
 import React from "react";
+import { FaUser, FaLock } from "react-icons/fa";
+import Image from "next/image";
+import backgroundImg from "../../../public/images/alumniLog.jpg";
 
 function LoadingScreen() {
   return (
@@ -157,47 +160,61 @@ export default function Register() {
   }
 
   return (
-    <div className="bg-[#edeced] h-screen flex flex-col justify-center items-center">
-      <div className="bg-white w-auto h-auto rounded-xl p-4 flex flex-col justify-center items-center">
+    <div className="relative h-screen flex justify-center items-center">
+      <Image
+        src={backgroundImg}
+        alt="Background Image"
+        layout="fill"
+        objectFit="cover"
+        quality={100}
+        className="absolute z-0"
+      />
+      <div className="relative w-[1200px] rounded-xl p-4 flex flex-col justify-center items-center backdrop-blur-md bg-white bg-opacity-30 z-10">
         <div className="flex flex-col justify-center items-center">
           <h1 className="font-bold text-3xl mt-5 text-blue-700">REGISTER</h1>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-7">
             {userInputs.map((input) => (
-              <div key={input.id} className="w-full block h-full">
+              <div key={input.id} className="w-full">
                 {input.type === "select" ? (
-                  <div>
-                    <select
-                      id={input.id}
-                      value={data[input.id]}
-                      onChange={handleInput}
-                      className="border-2 border-black p-[14px] rounded-xl w-full bg-white"
-                    >
-                      {input.options.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <select
+                    id={input.id}
+                    value={data[input.id]}
+                    onChange={handleInput}
+                    className="border-2 border-black p-[14px] rounded-xl w-full bg-white"
+                  >
+                    {input.options.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
                 ) : input.type === "textarea" ? (
-                  <div className="block w-full h-full">
-                    <textarea
-                      id={input.id}
-                      placeholder={input.placeholder}
-                      value={data[input.id]}
-                      onChange={handleInput}
-                      className="border-2 border-black p-3 rounded-xl w-full"
-                    />
-                  </div>
+                  <textarea
+                    id={input.id}
+                    placeholder={input.placeholder}
+                    value={data[input.id]}
+                    onChange={handleInput}
+                    className="border-2 border-black p-3 rounded-xl w-full h-[150px]"
+                  />
                 ) : (
-                  <div>
+                  <div className="relative">
+                    {input.type === "email" && (
+                      <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+                    )}
+                    {input.type === "password" && (
+                      <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+                    )}
                     <input
                       id={input.id}
                       type={input.type}
                       placeholder={input.placeholder}
                       value={data[input.id]}
                       onChange={handleInput}
-                      className="border-2 border-black p-3 rounded-xl w-full"
+                      className={`border-2 border-black p-3 rounded-xl w-full ${
+                        input.type === "email" || input.type === "password"
+                          ? "pl-10"
+                          : ""
+                      }`}
                     />
                   </div>
                 )}
@@ -206,18 +223,18 @@ export default function Register() {
                 )}
               </div>
             ))}
-            <div className="block w-full h-full col-span-2">
+            <div className="flex items-center">
               <input
                 type="file"
                 id="file"
                 onChange={(e) => setFile(e.target.files[0])}
-                className="border-2 border-black p-3 rounded-xl w-full"
+                className="border-2 border-black p-3 rounded-xl w-full bg-white"
               />
               {errors.file && (
                 <p className="text-red-600 text-left">{errors.file}</p>
               )}
             </div>
-            <div className="block w-full h-full">
+            <div className="block">
               {file && (
                 <img
                   src={URL.createObjectURL(file)}

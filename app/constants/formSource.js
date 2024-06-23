@@ -76,7 +76,7 @@ export const userInputs = [
     id: "connectedTo",
     label: "Connected To",
     type: "textarea",
-    placeholder: "Connected To",
+    placeholder: "Current Position",
   },
   {
     id: "address",
