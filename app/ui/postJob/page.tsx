@@ -3,6 +3,22 @@ import { useState, useEffect } from "react";
 import { getDatabase, ref, set } from "firebase/database";
 import { database } from "../../backend/firebase/config";
 import { v4 as uuidv4 } from "uuid";
+import { Roller } from "react-css-spinners";
+import React from "react";
+
+// Define the LoadingScreen component
+const LoadingScreen = () => (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+    }}
+  >
+    <Roller color="rgba(6,90,253,1)" size={100} />
+  </div>
+);
 
 const PostJob = () => {
   const [jobDetails, setJobDetails] = useState({
@@ -19,6 +35,7 @@ const PostJob = () => {
     applyLink: "",
   });
   const [currentUserUID, setCurrentUserUID] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   useEffect(() => {
     const userFromStorage = JSON.parse(localStorage.getItem("user") || "null");
@@ -35,13 +52,18 @@ const PostJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentUserUID) {
+      setIsLoading(true); // Start loading
       const jobId = uuidv4(); // Generate a unique ID for each job
       set(ref(database, `jobs/${currentUserUID}/${jobId}`), jobDetails)
         .then(() => {
           console.log("Job details added successfully");
+          alert("Job posted successfully!"); // Show success alert
         })
         .catch((error) => {
           console.error("Error adding job details: ", error);
+        })
+        .finally(() => {
+          setIsLoading(false); // Stop loading
         });
 
       setJobDetails({
@@ -59,6 +81,11 @@ const PostJob = () => {
       });
     }
   };
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
       <h2 className="text-4xl font-semibold mb-10 text-blue-500">
