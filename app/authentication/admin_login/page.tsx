@@ -4,6 +4,8 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../backend/firebase/config";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Roller } from "react-css-spinners";
+import React from "react";
 
 export default function Login() {
   // Define the type for errors state
@@ -13,12 +15,13 @@ export default function Login() {
     general?: string;
   }
 
-  // State variables for input values and errors
+  // State variables for input values, errors, user, and loading state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
@@ -31,7 +34,9 @@ export default function Login() {
       router.push("/screens/main_admin_screen");
     }
   }, [user]);
+
   const handleSignIn = async () => {
+    setIsLoading(true); // Start loading
     if (email.slice(-6) === ".admin") {
       const value = email.slice(0, -6);
       try {
@@ -39,8 +44,6 @@ export default function Login() {
         if (res.user) {
           console.log(res.user);
           setUser(res.user);
-          setEmail("");
-          setPassword("");
         } else {
           setErrors((prevErrors) => ({
             ...prevErrors,
@@ -51,8 +54,12 @@ export default function Login() {
         setErrors((prevErrors) => ({ ...prevErrors, general: e.message }));
       }
     } else {
-      setErrors((prevErrors) => ({ ...prevErrors, general: "Unknown Admin....!" }));
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        general: "Unknown Admin....!",
+      }));
     }
+    setIsLoading(false); // Stop loading
   };
 
   const validateEmail = (email: string) => {
@@ -76,6 +83,21 @@ export default function Login() {
     }
     handleSignIn();
   };
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Roller color="rgba(6,90,253,1)" size={100} />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#edeced] h-screen flex justify-center items-center ">

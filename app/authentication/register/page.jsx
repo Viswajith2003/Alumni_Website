@@ -7,6 +7,23 @@ import Link from "next/link";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { userInputs } from "../../constants/formSource";
+import { Roller } from "react-css-spinners";
+import React from "react";
+
+function LoadingScreen() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Roller color="rgba(6,90,253,1)" size={100} thickness={5} />
+    </div>
+  );
+}
 
 export default function Register() {
   const [data, setData] = useState({
@@ -24,17 +41,15 @@ export default function Register() {
     address: "",
   });
   const [errors, setErrors] = useState({});
-  const router = useRouter();
-
   const [file, setFile] = useState(null);
   const [per, setPerc] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const uploadFile = () => {
       const fileName = new Date().getTime() + file.name;
-      console.log(fileName);
       const storageRef = ref(storage, fileName);
-      console.log(storageRef);
       const uploadTask = uploadBytesResumable(storageRef, file);
 
       uploadTask.on(
@@ -60,7 +75,6 @@ export default function Register() {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setData((prev) => ({ ...prev, img: downloadURL }));
-            console.log("File available at", downloadURL);
           });
         }
       );
@@ -99,6 +113,7 @@ export default function Register() {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
+      setIsLoading(true); // Start loading
       try {
         const res = await createUserWithEmailAndPassword(
           auth,
@@ -114,6 +129,7 @@ export default function Register() {
       } catch (e) {
         console.error(e);
       }
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -135,6 +151,10 @@ export default function Register() {
     setFile(null);
     setPerc(null);
   };
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="bg-[#edeced] h-screen flex flex-col justify-center items-center">
