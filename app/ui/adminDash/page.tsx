@@ -1,13 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import Sidebar from "./sidebar/page";
-import Navbar from "./navbar/page";
+import Sidebar from "./sidebar/Sidebar";
+import Navbar from "./navbar/Navbar";
 import DashAdmin from "./dashboard /page";
 import AlumniList from "../../components/adminAlumniList/page";
 import Gallery from "../../components/adminGallary/page";
 import AddEvents from "../../components/adminEvents/page";
 import Jobs from "../../components/adminJobs/page";
-import Feedbacck from "../../components/adminFeedback/page";
+import Feedback from "../../components/adminFeedback/page";
 import ShareIdea from "../../components/adminShareIdea/page";
 import SendMail from "../../components/adminSendMail/page";
 
@@ -28,7 +28,7 @@ export default function AdminDash() {
       case "jobs":
         return <Jobs />;
       case "feedback":
-        return <Feedbacck />;
+        return <Feedback />;
       case "shareIdea":
         return <ShareIdea />;
       case "sendMail":

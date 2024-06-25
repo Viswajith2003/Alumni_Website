@@ -1,13 +1,20 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Data from "./data";
 import { IoLogOutOutline } from "react-icons/io5";
 
+interface SidebarProps {
+  sidebarToggle: boolean;
+  setActiveScreen: (screen: string) => void;
+  activeScreen: string;
+}
+
 export default function Sidebar({
   sidebarToggle,
   setActiveScreen,
   activeScreen,
-}) {
+}: SidebarProps) {
   return (
     <div
       className={`${
