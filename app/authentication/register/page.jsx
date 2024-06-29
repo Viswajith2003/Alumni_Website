@@ -261,7 +261,7 @@ export default function Register() {
           <p className="text-[16px] font-normal">Already have an account?</p>
           <Link href="/authentication/login">
             <p className="text-[16px] font-semibold text-blue-700 ml-2">
-              Login
+              Logined
             </p>
           </Link>
         </div>
